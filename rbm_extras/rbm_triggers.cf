@@ -1,0 +1,109 @@
+# The following default pack of 60 game icons can be located
+# under ./rbm_icons/Icons_Games/ in the installation archive.
+
+# Due to a glitch with the query interface and icon ID's larger
+# than 9 digits, it's highly recommended to trim any icon names
+# that contain more than 9 digits in their ID down to 9 (usually
+# I trim off the end digit(s) so I have icon_123456789.
+# Otherwise the !use trigger might not apply the icon correctly.
+
+# Upload your icon(s) to your virtual server;
+# /home/teamspeak/files/virtualserver_X/internal/icons/
+# Add the icon_<9digit> ID + trigger name, save this file. RbMod
+# will automatically detect the changes while running and
+# apply the information to !help use and !use <name>.
+
+# <Trigger Name> equals <9 digit checksum: icon_123456789>
+
+# Games
+Anno = 467883613
+AWE = 418651298
+A2 = 361917507
+OA = 164483597
+DayZ = 396084993
+BF2 = 218052869
+BF3 = 339566651
+BBC2 = 214167224
+BL = 278921728
+BL2 = 411257906
+BLR = 211346696
+COD = 245562936
+COD2 = 892474280
+COD3 = 347996296
+COD4 = 126143258
+COH = 168988449
+CS = 328080641
+CSS = 300275265
+CSGO = 737149811
+CCB = 6194738
+Crysis = 329760189
+Spore = 148493290
+DoD = 411199099
+DC = 152052146
+DOTA = 325235154
+DA = 387410400
+Duke = 843791754
+Fable = 166053056
+FSX = 140912116
+FW = 398623964
+GoW = 415948096
+GTA = 182982128
+GW = 237536907
+GW2 = 363978514
+Halo = 218203919
+HF = 280445005
+Hunted = 234194161
+LoL = 422865551
+L4D2 = 129393474
+LoTR = 347408082
+MoH = 263401762
+Max = 150104205
+MC = 305935484
+Payday = 371363500
+P2 = 271663001
+R6V2 = 353437227
+R3 = 286383474
+RS = 553642817
+SRT = 204634418
+Sanctum = 427425069
+SS = 139997036
+SR = 302459843
+STO = 402107506
+SWTOR = 329517427
+Synergy = 270499856
+TF2 = 313013838
+Skyrim = 180172898
+W3 = 405173249
+WoT = 306097223
+WoW = 120315238
+
+# Others
+Working = 322292754
+Doobie = 404341065
+420 = 257875720
+Movie = 140682786
+Snoozing = 425483021
+Sleeping = 425483021
+PowerNap = 252801743
+Coffee = 356564682
+Tea = 218927413
+Food = 974731479
+Cookies = 323639124
+Stuffed Peppers = 345155993
+Coding = 258423318
+Perl = 350124005
+Music = 103610029
+Tunes = 415917706
+PhotoShop = 103064385
+Roast = 409998158
+Troll = 190084902
+Tr011 = 109935985
+Lounging = 113455274
+Sweating = 405441260
+Sick = 234814829
+Hungover = 234814829
+Pounding = 122644479
+Pounded = 383220924
+Blowing = 255942007
+Blowed = 935127214
+Muff = 182684922

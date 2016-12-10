@@ -1,0 +1,398 @@
+﻿#    ,============================================================================.
+#    |             ____     __                             __                     |
+#    |            /\  _`\  /\ \       /'\_/`\             /\ \                    |
+#    |            \ \ \L\ \\ \ \____ /\      \     ___    \_\ \                   |
+#    |             \ \ ,  / \ \ '__`\\ \ \__\ \   / __`\  /'_` \                  |
+#    |              \ \ \\ \ \ \ \L\ \\ \ \_/\ \ /\ \L\ \/\ \L\ \                 |
+#    |               \ \_\ \_\\ \_,__/ \ \_\\ \_\\ \____/\ \___,_\                |
+#    |                \/_/\/ / \/___/   \/_/ \/_/ \/___/  \/__,_ /                |
+#    |                                                                            |
+#    |                   RbMod (Responsive Bot Modification)                      |
+#    |             Copyright (C) 2013, Matthew Weyrich - Scor9ioN                 |
+#    |                       (admin@rbmod.presension.com)                         |
+#    |                         ᒥ ʀbmod.pʀesension.com ᒣ                           |
+#    |                                  v3.2.3                                    |
+#    `============================================================================`
+
+
+#
+# Prerequisites:
+#                 Time::HiRes (E.g. perl-Time-HiRes),
+#                 LWP::Simple (yum install -y perl-libwww-perl ..OR..
+#                              perl -MCPAN -e 'install Bundle::LWP'),
+#                 Win32::Console::ANSI (For Windows O/S)
+
+# Out of the box RbMod should run most features with the above cpan modules
+# installed. If you would like to download the free Geo-IP database from MaxMind;
+# http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz, placing the
+# included GeoLiteCity.dat at the root of RBMod, you can further enable RBMods
+# 'Package_GeoIP_On' flag and subsequently the temperature feature and a few other
+# features will also pick-up on the newly obtained City/Region information.
+
+# Optional Packages:
+#                 Geo::IP::PurePerl, Weather::Underground, XML::Parser
+
+
+
+#    __________________________________________________________ RBMOD CONNECT SETUP
+#    + Choose the IP or DNS address to your Teamspeak3 server.
+Query_Address = 192.168.1.2
+#    + Select the virtual ts3 server instance RbMod will be running on.
+Query_Virtual_Server_Port = 9987
+#    + Select the query port running on the TS3 server.
+Query_Port = 10011
+#    + Select the log-in name for the query port.
+Query_Login = serveradmin
+#    + Select the password for the query port.
+Query_Password = EcQ2eQer
+#    + Choose a Nickname to display to your clients.
+Query_Bot_Name = Rb323
+#    + Choose a second nickname for our child query bot.
+Query_Bot_Name2 = Rb323 Child
+#    + Select the max re-connections to attempt.
+Query_Connect_Retry = 5
+#    + Select the delay in seconds between retry attempts.
+Query_Connect_Retry_Delay = 4
+#    + Select the limit of queries to send from RbMod -> TS3 Server.
+Query_Limit = 15
+
+
+#    ____________________________________________________________ RBMOD GROUP SETUP
+#    + (Default) Select the Default Guest group ID on your TS3 virtual server.
+Guest_Group_ID = Default
+#    + Choose a name for RBMods replicated guest group.
+Guest_Group_Name = Gɛst
+#    + Select the Sort order for the guest group.
+Guest_Group_Sort_Order = 13
+#    + Select group IDs that will remain exempt from this guest group assignment.
+Guest_Group_Exempt_Group_IDs = 2,6,7
+#    + Which groups remain exempt from chat/name/description etc. language filters?
+All_Language_Filters_Exempt_Group_IDs = 2,6,7
+
+
+#    _________________________________________________________ RBMOD INTERNAL SETUP
+#    + Choose a text color for RBMod terminal output.
+#    + Red, Green, Yellow, Blue, Magenta, Cyan & White.
+Console_Text_Color = Yellow
+#    + Choose how long in seconds before extinguishing stored client information
+#    + in RbMods database.
+Database_Active_Clients_Cache_Time = 5256000
+#    + Stream log information to the terminal.
+Debug = 0
+#    + Check online for RBMod updates and download the latest archive
+#    + release directly to the root of your RBMod directory.
+Check_For_Updates_On = 1
+
+#    ________________________________________________________________ RBMOD LOGGING
+#    + (ON=1/OFF=0) Log each boot-up session to rbm_logs/
+Logging_On = 1
+#    + Choose how long in seconds before extinguishing stored log files.
+Logging_Cache_Time = 604800
+
+
+#    ______________________________________________________________ RBMOD GUI SETUP
+#    [NOTE] This Mod feature may or may not be updated, as an alternative
+#    to a GUI application may be in the works for the future.
+#    + Bind ourselves to an IP, example: 0.0.0.0 for all.
+WebServer_On = 0
+WebServer_Address = 0.0.0.0
+WebServer_Port = 7000
+WebServer_Client_Limit = 100
+WebServer_Client_WhiteList = 192.168.1.1
+WebServer_Login = Admin
+WebServer_Password = RbMod
+
+
+#    ________________________________________________________________ CPAN MODULE 1
+#    [DEPENDENCIES] CPan Module Geo::IP::PurePerl
+#    + Binary database GeoLiteCity.dat 'http://dev.maxmind.com/geoip/legacy/geolite'
+#    + Place the database at the root of rbmod.
+#    + (ON=1/OFF=0) Requires cpan package 'Geo::IP::PurePerl' module.
+Package_GeoIP_On = 0
+
+
+#    ________________________________________________________________ CPAN MODULE 2
+#    [DEPENDENCIES] CPan Module Weather::Underground and Package_GeoIP_On=1
+#    + (ON=1/OFF=0) Requires cpan package 'Weather::Underground' module.
+Package_Weather_Underground_On = 0
+
+
+
+#¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+#------------------------- FEATURES - ADJUST ACCORDINGLY --------------------------
+#__________________________________________________________________________________
+Automove_Client_AFK_On = 0
+Automove_Client_AFK_Channel_ID = 75
+Automove_Client_AFK_Exempt_Group_IDs = 2,6,7
+Automove_Client_AFK_Exempt_Channel_IDs = 3
+Automove_Client_AFK_Return_To_Channel_On = 1
+Automove_Client_AFK_Time_Requirement = 2700
+
+
+#__________________________________________________________________________________
+Automove_Client_OnJoin_On = 0
+Automove_Client_OnJoin_DBIDs = 11->975
+Automove_Client_OnJoin_Group_IDs = 2->2,6->2,1297->156
+Automove_Client_OnJoin_Notice_On = 0
+Automove_Client_OnJoin_Notice = Default
+Automove_Client_OnJoin_Existing_CCode_On = 1
+Automove_Client_OnJoin_Geo_Channel_On = 1
+Automove_Client_OnJoin_Geo_Channel_Sort_Order = 916
+
+
+#__________________________________________________________________________________
+Autofill_Empty_CCode_Slots_On = 0
+Autofill_Empty_CCode_Slots_Sort_Order = 1100
+
+
+#__________________________________________________________________________________
+Channel_Delete_Dormant_On = 0
+Channel_Delete_Dormant_Exempt_IDs = [0-3631]
+Channel_Delete_Dormant_Interval = 60
+#    + Time in seconds a channel is considered dormant before deleting.
+Channel_Delete_Dormant_Requirements = 43200
+#    + Time in seconds required before applying a trash icon beside a channel.
+#    + Indicating the channel will be cleaned up soon.
+Channel_Delete_Dormant_Trash_Icon_Requirements = 36000
+
+
+#__________________________________________________________________________________
+Channel_Flood_Detection_On = 1
+Channel_Flood_Detection_Ban = 0
+Channel_Flood_Detection_Ban_Duration = 3600
+Channel_Flood_Detection_CID_Move_Unstuck = 1
+Channel_Flood_Detection_Channel_ID = Default
+Channel_Flood_Detection_Channel_Name = Default
+Channel_Flood_Detection_Channel_Sort_Order = 501
+Channel_Flood_Detection_Exempt_Group_IDs = 2,6,7
+Channel_Flood_Detection_Kick = 0
+Channel_Flood_Detection_Punish_Duration = 120
+Channel_Flood_Detection_Punish_Reason = Default
+Channel_Flood_Detection_Time_Limit = 60
+Channel_Flood_Detection_Tolerance = 5
+
+
+#__________________________________________________________________________________
+Channel_Punish_Detection_On = 0
+Channel_Punish_Detection_Channel_ID = 81
+
+
+#__________________________________________________________________________________
+Channel_Info_Switching_On = 1
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Monitor channel conversations.
+Channel_Watch_On = 0
+#    + Select how many additional query bots to connect to your server.
+Channel_Watch_Bot_Count = 1
+#    + (<ChanID1>,<ChanID2>,etc.) Select the Channel ID(s) in which to move each
+#    + channel bot into, to watch for channel messages.
+Channel_Watch_Channel_IDs = 3
+#    + (<DBID1>,<DBID2>,etc.) Select the client DBIDs RbMod will append your
+#    + 'Channel_Watch_Channel_IDs' channel ID conversations beside.
+Channel_Watch_Append_ChannelText_To_Tag_Client_DBIDs = 7
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Monitor channel names for bad language? (rbm_badwords.cf)
+Channel_Name_Language_Filter_On = 1
+#    + How often should Rb process the channellist information for changes?
+Channel_Name_Language_Filter_Interval = 4
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Monitor client descriptions for bad language? (rbm_badwords.cf)
+Client_Description_Language_Filter_On = 1
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Monitor client away messages for bad language? (rbm_badwords.cf)
+Client_Away_Status_Language_Filter_On = 1
+
+
+#__________________________________________________________________________________
+Clone_Detection_On = 0
+Clone_Detection_Sort_Order = 24
+
+
+#__________________________________________________________________________________
+Distance_Calculator_On = 0
+Distance_Calculator_Server_Longitude = -18.445139199999970000
+Distance_Calculator_Server_Latitude = 9.030094600000000000
+
+
+#__________________________________________________________________________________
+Dynamic_Banner_On = 1
+Dynamic_Banner_URL_Links = rbmod.presension.com,www.presension.com
+Dynamic_Banner_URL_Links_Interval = 3600
+Dynamic_Banner_URLs = http://rbmod.presension.com/rb4.png,rbmod.presension.com/rb5.png,rbmod.presension.com/rb3.png
+Dynamic_Banner_URLs_Interval = 3600
+
+
+#__________________________________________________________________________________
+Exclamation_Triggers_On = 1
+Exclamation_Triggers_Admin_Group_IDs = 2,9
+Exclamation_Triggers_Flood_Time_Limit = 10
+Exclamation_Triggers_Flood_Tolerance = 3
+
+
+#__________________________________________________________________________________
+Group_Protected_On = 0
+Group_Protected_Ban = 0
+Group_Protected_Ban_Duration = 28800
+Group_Protected_Ban_Reason = Default
+Group_Protected_GroupID_MemberIDs = 2->[4],6->[6,57,200,242,737],1188->[4]
+Group_Protected_Kick = 0
+Group_Protected_Kick_Reason = Default
+
+
+#__________________________________________________________________________________
+IRC_Bot_On = 0
+IRC_Bot_Label = EFNet
+IRC_Bot_Server = irc.arcti.ca
+IRC_Bot_Port = 6667
+IRC_Bot_Nick = RbmAdmin
+IRC_Bot_Nick_Alternative = RbmAdmin2
+IRC_Bot_Login = RbMod
+IRC_Bot_Channels = RbMod,RbMod-Help-Desk
+IRC_Bot_AutoOp = 180.7.22.6
+IRC_Bot_AutoVoice = 180.7.22.6
+
+
+#__________________________________________________________________________________
+MOTD_On = 1
+
+
+#__________________________________________________________________________________
+Military_Rank_On = 1
+Military_Rank_Globally_Announce = 1
+Military_Rank_Icon_Pack = 1
+Military_Rank_Interval = 30
+Military_Rank_Privately_Announce = 1
+Military_Rank_Privileged_Client_DBIDs = 4->27,13->24
+Military_Rank_Privileged_Group_IDs = 56->6,7->3
+Military_Rank_Requirements = 10800
+Military_Rank_Sort_Order = 1006
+
+
+#__________________________________________________________________________________
+Nickname_Protected_On = 0
+Nickname_Protected_Ban = 1
+Nickname_Protected_Ban_Time = 1800
+Nickname_Protected_Group_IDs = 2,9
+Nickname_Protected_Interval = 3
+Nickname_Protected_Punish_All = 0
+Nickname_Protected_Punish_Reason = Default
+
+
+#__________________________________________________________________________________
+Nickname_Language_Filter_On = 1
+Nickname_Language_Filter_Ban = 1
+Nickname_Language_Filter_Ban_Time = 120
+Nickname_Language_Filter_Exempt_On = 0
+Nickname_Language_Filter_Punish_Reason = Default
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Choose whether or not to monitor the amount of re-connections
+#    + a client makes to your virtual server. Each connection will be compared to
+#    + the 'OnJoin_Reconnect_Gauge_Requirements' variable.
+OnJoin_Reconnect_Gauge_On = 1
+#    + Choose in seconds the window in which a client's allowed to reconnect. Each
+#    + reconnect will escalate to a warning / kick & eventually a ban.
+OnJoin_Reconnect_Gauge_Requirements = 180
+
+
+#__________________________________________________________________________________
+OS_Detection_On = 0
+OS_Detection_Sort_Order = 1007
+
+
+#__________________________________________________________________________________
+Ping_Meter_On = 0
+Ping_Meter_Sort_Order = 1009
+#    + Choose in seconds how often each client gets pinged.
+Ping_Meter_Interval = 120
+
+
+#__________________________________________________________________________________
+RBL_Check_On = 1
+RBL_Ban_Punish_Reason = Your IP Address is flagged!
+RBL_Check_Cache = 300
+RBL_Check_WhiteList = 180.7.22.6
+RBL_Server = xbl.spamhaus.org,bl.spamcop.net,psbl.surriel.com,combined.rbl.msrbl.net
+
+
+#__________________________________________________________________________________
+Recording_Detect_On = 1
+Recording_Detect_Exempt_Group_IDs = 2,9,10
+
+
+#__________________________________________________________________________________
+Reverse_DNS_On = 1
+Reverse_DNS_Display_Privately = 0
+
+
+#__________________________________________________________________________________
+#    [DEPENDENCIES] LWP::Simple, XML::Parser. 
+#    Example: perl -MCPAN -e 'install libwww-perl' 
+#    + (ON=1/OFF=0) Display RSS data to your virtual server.
+RSS_Feed_On = 0
+#    + Choose the location in which to monitor for feed updates.
+RSS_Feed_URL = http://www.gamespot.com/rss/game_updates.php?platform=5
+#    + Choose the length in seconds to wait between outgoing URL reloads.
+RSS_Feed_Interval = 900
+RSS_Global_Chat_Feed = 1
+RSS_Private_Chat_Feed = 1
+
+
+#__________________________________________________________________________________
+Status_On = 1
+Status_AFK_Detect_TS3_Away = 1
+Status_AFK_Time_Requirement = 2700
+Status_Idle_Time_Requirement = 180
+Status_Sort_Order = 1010
+Status_Display_Country_OnJoin = 1
+Status_Display_Country_OnJoin_Timeout = 30
+
+
+#__________________________________________________________________________________
+#    [DEPENDENCIES] Package_GeoIP_On=1 and Package_Weather_Underground_On=1.
+Temperatures_On = 0
+Temperatures_Interval = 600
+Temperatures_Sort_Order = 1005
+Temperatures_Global_Message = 1
+
+
+#__________________________________________________________________________________
+TraceClients_On = 0
+TraceClients_Cache = 604800
+TraceClients_Dual_Trace = 1
+TraceClients_Icon_Pack = 1
+TraceClients_Sort_Order = 1008
+TraceClients_Trace_1_Type = TCP
+TraceClients_Trace_2_Type = ICMP
+TraceClients_Message_Results_On = 1
+TraceClients_Message_Results_Admin_GroupIDs = 2,6
+
+
+#__________________________________________________________________________________
+Traffic_Meter_On = 0
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Display a global message relaying either each clients custom
+#    + on-join !tag data or ts3 description field information.
+Verbose_Global_Onjoin_Client_Tags = 1
+
+
+#__________________________________________________________________________________
+#    + (ON=1/OFF=0) Display a random global text message color coated from over
+#    + 1100 hex codes? (rbm_goodbye.cf)
+Verbose_Global_Onpart_Random_Goodbye = 1
+
+# Add your server to the online list of active RbMod servers at http://rbmod.presension.com/servers
+Subscribe_To_Rb_Online_Server_List_On = 1
+Subscribe_To_Rb_Online_Server_List_Interval = 300
+Subscribe_To_Rb_Online_Server_List_Address_Displayed = My External IP/DNS Of TS3 Server

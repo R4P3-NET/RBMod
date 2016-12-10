@@ -1,0 +1,815 @@
+    ,============================================================================.
+    |             ____     __                             __                     |
+    |            /\  _`\  /\ \       /'\_/`\             /\ \                    |
+    |            \ \ \L\ \\ \ \____ /\      \     ___    \_\ \                   |
+    |             \ \ ,  / \ \ '__`\\ \ \__\ \   / __`\  /'_` \                  |
+    |              \ \ \\ \ \ \ \L\ \\ \ \_/\ \ /\ \L\ \/\ \L\ \                 |
+    |               \ \_\ \_\\ \_,__/ \ \_\\ \_\\ \____/\ \___,_\                |
+    |                \/_/\/ / \/___/   \/_/ \/_/ \/___/  \/__,_ /                |
+    |                                                                            |
+    |                   RbMod (Responsive Bot Modification)                      |
+    |             Copyright (C) 2013, Matthew Weyrich - Scor9ioN                 |
+    |                       (admin@rbmod.presension.com)                         |
+    |                         ᒥ ʀbmod.pʀesensioᥒ.com ᒣ                           |
+    |                         ᒪ ʁƿɯoɖ.bʁɢƨɢuƨᵎoᥙ.coɯ ᒧ                           |
+    |                                  vƸ.2.3                                    |
+    `============================================================================`
+
+
+                            rbm_settings.cf HELP document
+
+  INSTALLATION
+    - Download and unzip the contents to a server / directory of your choice.
+    - Open rbm_settings.cf and change the first few options for your server setup.
+    - Copy the contents of /rbm_icons/* to your TS3 virtual server.
+      '.../teamspeak/files/virtualserver_1/internal/icons' for example.
+      Please go through the settings.cf features and select the corresponding icon pack or
+      leave the entire icon pack off your virtual server if disabling a particular feature.
+    - Make sure rbmod.pl is set to 744+ (executable) and run #: ./rbmod.pl
+
+
+  OTHER NOTES
+    - Remember to add RbMod's IP to the TS3 query_ip_whitelist.txt
+    - Disable logging of server permissions on your virtual server might reduce any excess
+      HDD activity.
+
+
+__ TeamSpeak3 Server Credentials _______________________________________________
+Enter all the information to log into your TS3 server here, including the global
+list of protected groups, which RbMod uses through-out some other features.
+
+- Query_Address
+About: Choose either a DNS or IP Address of your TS3 server.
+Values: <Domain Name> or <IP Address>
+Example: 192.168.0.2
+
+- Query_Virtual_Server_Port
+About: This variable selects the TS3 virtual server to work with after
+connecting to your TS3 server's Query_Port.
+Values: <Numeric Virtual TS3 UDP Port>
+Example: 9987
+
+- Query_Port
+About: Choose the TS3 servers query port to connect into with RbMod.
+Values: <Numeric TCP Port Number>
+Example: 10011
+
+- Query_Login
+About: Choose the Log-in credentials of your TS3 query server.
+Values: <Log-in Name>
+Example: serveradmin
+
+- Query_Password
+About: Choose the Password for your TS3 query server.
+Values: <Log-in Password>
+Example: S4zOSR8i
+
+- Query_Bot_Name & Query_Bot_Name2
+About: Choose a name for the Mod while connected to your TS3 server. This name
+will be seen when the Mod interacts with the server or clients.
+Values: <45 character Query Nickname>
+Example: RbMod Rocks
+
+- Query_Connect_Retry
+About: When RbMod drops a connection to your TS3 server, this value defines the
+amount of attempts to reconnect, before giving up.
+Values: <Numeric Count Number>
+Example: 5
+
+- Query_Connect_Retry_Delay
+About: Define in <seconds> the amount of time RbMod pauses between Query_Retry
+attempts.
+Values: <Seconds>
+Example: 5
+
+- Query_Limit
+About: This variable defines the number of clients RbMod will read every loop,
+every second. Parsing the clientlist into chunks of your choosing. If the
+number of clients on your server exceeds this query limit, RbMod will take an
+extra second to read the extra chunk you've defined here, thus taking two
+passes to completely read through every client on the server, effectively
+decreasing bytes transferred to and from your TS3 server and RbMod, while
+slowing a few features such as the traffic meter and channel flood detection.
+As these features might skip a beat, depending on the number of Mod queries it
+takes to complete the entire clientlist process.
+Values: <Limit>
+Example: 15
+
+- Guest_Group_ID
+About: Upon booting up, Rb will duplicate your default Guest Group and place
+new clients into this replicated group. This is necessary as RbMod uses
+it's own groups for features, and in doing so each client must part the
+temporary default guest group. This setting will ensure the client remains in a
+'guest' group duplicate after Rb feature placements(s). Use Default to scan for
+the word 'Guest', and RbMod will use this group as the default guest group.
+Values: <GroupID> or <Default>
+Example: Default
+
+- Guest_Group_Name
+About: Choose a name for this replicated guest group.
+Example: Abnormal
+
+- Guest_Group_Sort_Order 
+About: Select the Sort order for rbmods replicated guest group. This will also
+position the icon next to a clients name.
+Values: <number>
+Example: 999
+
+- Guest_Group_Exempt_Group_IDs
+About: Here you can decide on which groups RbMod considers 'regular' groups,
+basically every group outside the guest group. As RbMod will assign the
+replicated Guest group it created upon boot-up to anyone outside this list.
+Some other features draw upon these values for exemptions.
+Values: <GroupID>,<GroupID>,<GroupID>,<etc.>
+Example: 2,9,10
+
+- All_Language_Filters_Exempt_Group_IDs
+About: This setting determines which server groups on the current server
+are exempt from the RbMod Language filters.
+Values: <GroupID>,<GroupID>,<GroupID>
+Example: 2,9,10
+
+
+__ Miscallaneaus _______________________________________________________________
+- Console_Text_Color
+About: Choose between Red, Green, Yellow, Blue, Magenta, Cyan & White for the
+consoles theme color in RbMod.
+Values: (Red,Green,Yellow,Blue,Magenta,Cyan,White)
+Example: Yellow
+
+- Database_Active_Clients_Cache_Time
+About: Choose how long in seconds before extinguishing stored client information
+in RbMods built-in database.
+Values: <Seconds>
+Example: 5256000
+
+- Debug
+About: Choose whether or not to send log / Mod data to the console window.
+Values: 1 to enable or 0 to disable.
+
+- Check_For_Updates_On
+About: Check online at startup for RBMod updates and download the latest archive
+release directly to the root of your RBMod directory.
+Values: 1 to enable or 0 to disable.
+
+
+__ Logging _____________________________________________________________________
+Decide whether or not you would like logs created during every boot-up. If you
+do, choose the length in seconds in which to keep logs around on your server.
+Logs exceeding this time frame will be purged at boot-up.
+
+- Logging_On
+Values: 1 to enable or 0 to disable.
+
+- Logging_Cache_Time
+About: Choose in <Seconds> the length in which to keep your log files.
+Values: <Seconds>
+Example: 604800
+
+
+__ Web Server - Interface ______________________________________________________
+Recently since the release of RbMod version 2.0 Beta 7, Rb administrators can
+setup a web server / interface to interact with the Mod. Please choose the
+credentials you would like for yourself or other administrators to log-in to
+the Mod interface. Be sure to white list the PC / IP address of those that
+are permitted access. Otherwise RbMod will deny access entirely.
+
+- WebServer_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- WebServer_Address
+About: Choose the <IP address> in which to host RbMods Web Server. Some people
+have multiple NICs, this ensures you have a listening connection on the right
+device.
+Values: <IP Address>
+Example: 0.0.0.0 (All ethernet interfaces)
+
+- WebServer_Port
+About: Choose which port to listen for incoming web browser connections. If you
+decide on a port other than TCP port 80, be sure to append :<port> after the
+URL string. Example: http://192.168.0.2:7000
+Values: <Numeric TCP Port>
+Example: 80
+
+- WebServer_Client_Limit
+About: Choose the maximum amount of con-current connections to the Mods Web
+Interface.
+Values: <Numeric Limit>
+Example: 100
+
+- WebServer_Client_WhiteList
+About: Select the individual IP addresses of permitted clients (Client access to
+the web server, before the web interface even invokes).
+Values: <IP Address>,<IP Address>,<IP Address>,<etc.>
+Example: 192.168.0.2,192.168.0.3,10.0.0.2,10.0.0.5
+
+- WebServer_Login
+About: Decide on a case sensitive web interface log-in name.
+Values: <Case Sensitive Log-in Name>
+Example: Admin
+
+- WebServer_Password
+About: Decide on a case sensitive web interface password.
+Values: <Case Sensitive Password>
+Example: RbMOD
+
+
+______ CPAN MODULE 1 __________________________________________________________________
+[DEPENDENCIES] CPan Module Geo::IP::PurePerl
+Binary database GeoLiteCity.dat 'http://dev.maxmind.com/geoip/legacy/geolite'
+Place the database at the root of rbmod.
+
+- Package_GeoIP_On
+About: Decides whether the locational feature(s) present in RbMod, are active. NOTE The
+weather function will cease to work if this feature is not enabled.
+Values: '1' to enable or '0' to disable.
+Example: 1
+
+
+______ CPAN MODULE 2 __________________________________________________________________
+[DEPENDENCIES] CPan Module Weather::Underground and Package_GeoIP_On = 1
+
+- Package_Weather_Underground_On
+About: Decides whether the weather features present in RbMod, are active. This function
+uses Weather Underground to retrieve weather information for your location which is 
+determined by your IP Address.
+Values: '1' to enable or '0' to disable.
+Example: 1
+
+
+__ Auto-Move AFK Users ________________________________________________________
+Detect idle clients and place them in a designated channel of your choice.
+Decide which group IDs remain exempt from this feature.
+
+- Automove_Client_AFK_On
+Values: '1' to enable or '0' to disable.
+Example: 1
+
+- Automove_Client_AFK_Channel_ID
+About: Choose an existing Channel ID to move AFK clients into.
+Values: <ChannelID>
+Example: 648
+
+- Automove_Client_AFK_Exempt_Group_IDs
+About: List servergroup IDs you would like to keep exempt from this feature.
+Values: <GroupID>,<GroupID>,<etc.>
+Example: 2,9,10
+
+- Automove_Client_AFK_Exempt_Channel_IDs = 3
+About: List channel IDs you would like to skip (music channels for example).
+Values: <ChannelID>,<ChannelID>,<etc.>
+Example: 2,9,10
+
+- Automove_Client_AFK_Return_To_Channel_On
+About: Place clients back in respective channels after being moved, if TS3
+activity detected.
+Values: <Seconds>
+Example: 1800
+
+- Automove_Client_AFK_Time_Requirement
+About: Clients max idle time in seconds before being considered AFK & moved.
+Values: <Seconds>
+Example: 1800
+
+
+__ Auto-Move New Clients ___________________________________________________________
+RbMod detects user groups, or client DBIDs upon joining your TS3 server, which
+in turn are placed in a specified channel ID.
+
+- Automove_Client_OnJoin_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- Automove_Client_OnJoin_DBIDs
+Values: <ClientDBID>-><ChannelID>
+Example: 5->69
+
+- Automove_Client_OnJoin_Group_IDs
+Values: <GroupID>-><ChannelID>
+Example: 34269->61
+
+- Automove_Client_OnJoin_Notice
+Values: <Default> or <Custom 45 character message>
+Example: You have been auto-moved!
+
+- Automove_Client_OnJoin_Notice_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- Automove_Client_OnJoin_Existing_CCode_On
+About: Place a 2 digit CCode (Example: Canada Room (CA) ) in front or behind any
+channel name, and users not already auto-moved will be placed in this designated
+channel upon joining your server.
+Values: 1 to enable or 0 to disable.
+Example: 1
+Dependencies: Automove_Client_OnJoin_On
+
+Automove_Client_OnJoin_Geo_Channel_On
+About: Enable or disable placing new client connections into geographical rooms.
+Values: 1 to enable or 0 to disable.
+Example: 1
+Dependencies: Package_GeoIP_On=1
+
+Automove_Client_OnJoin_Geo_Channel_Sort_Order
+About: Choose a channel ID in which to sort all new geographical channels under.
+Values: <ChannelID>
+Example: 1
+
+__ Auto-Fill Icon CCode Slot ___________________________________________________
+Local area network IP addresses and some 2 digit CCodes aren't available for TS3
+to display a country icon, this will build an empty group to keep all your other
+icons in line with one another.
+
+- Autofill_Empty_CCode_Slots_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+Autofill_Empty_CCode_Slots_Sort_Order
+About: Choose a servergroup SortID in which to sort this icon/group into.
+Values: <SortID>
+Example: 1100
+
+__ Channel Delete Dormant Channels _____________________________________________
+RbMod will cleanup any temporary, semi-permanent, permanent channel outside the
+exemption list, after laying dormant for a specified amount of time. Be sure to
+add ALL your channel IDs, either individually or with a range before turning
+this feature ON.
+
+- Channel_Delete_Dormant_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- Channel_Delete_Dormant_Exempt_IDs
+About: Choose which channels to skip while scanning. Either individual channel
+IDs, seperated by commas. Or a start to end 'range' of channel IDs.
+Values: <ChannelID>,<ChannelID>,[<ChannelIDStart>-<ChannelIDEnd>]
+Example: 223,520,521,[523-600]
+
+- Channel_Delete_Dormant_Interval
+About: Choose how often in <seconds> to scan for dormant channels.
+Values: <Seconds>
+Example: 30
+
+- Channel_Delete_Dormant_Requirements
+About: Choose in <seconds> the length of time in which a channel must remain
+dormant before being considered for deletion / cleanup.
+Values: <Seconds>
+Example: 43200
+
+Channel_Delete_Dormant_Trash_Icon_Requirements
+About: Choose in <seconds> the length of time in which a channel must remain
+inactive before being considered ready for deletion. Display a trash icon beside
+the channel before it's finally deleted with Channel_Delete_Dormant_Requirements.
+Values: <Seconds>
+Example: 21600
+
+
+__ Channel Flood Detection _____________________________________________________
+
+You have either the option of punishing, kicking or banning an individual for
+spamming through all your channels. Punishment includes the old temporary
+channel creation upon infraction, or the ability to use your own channel ID and
+move the person back to a default channel ID once unpunished.
+
+- Channel_Flood_Detection_Ban
+About: If this variable is set, it will over rule the Kick and Channel
+punishments.
+Values: 1 to enable or 0 to disable.
+
+- Channel_Flood_Detection_Ban_Duration
+About: If Channel_Flood_Detection_Ban is set to 1, this option gives you the
+length in seconds in which to ban a client for spamming through your channels.
+Values: <Seconds>
+Example: 3600
+
+- Channel_Flood_Detection_CID_Move_Unstuck
+About: Choose the channel ID in which to move unpunished (unstuck) clients,
+after exceeding Channel_Flood_Detection_Punish_Duration.
+Values: <ChannelID>
+Example: 19
+
+- Channel_Flood_Detection_Channel_ID
+About: Choose your own channel to stick clients into with the sticky icon
+attached still. If you would like RbMod to setup and destroy a temporary channel
+upon infractions, leave as <Default>.
+Values: <ChannelID> or <Default>
+Example: Default
+
+- Channel_Flood_Detection_Channel_Name
+About: If Channel_Flood_Detection_Channel_ID equals <Default>, this will be your
+temporary channel name for abusive clients.
+Values: <Channel Name>
+Example: Default <- 'RbMod Correctional Facility'
+
+- Channel_Flood_Detection_Channel_SortOrder
+About: Choose an existing channel sort order ID to place your temporary channel
+above.
+Values: <Channel_Sort_OrderID>
+Example: 16
+
+- Channel_Flood_Detection_Exempt_On
+About: Ignore particular groups designated under 'Query_Exempt_Group_IDs', as
+not to punish your friendly members.
+Values: 1 to enable or 0 to disable.
+
+- Channel_Flood_Detection_Kick
+About: If this variable is on, it will over rule the channel punishment settings
+and kick the user off the server immediately for spamming through your channels.
+Values: 1 to enable or 0 to disable.
+
+- Channel_Flood_Detection_On
+About: Turn On or Off all Channel Flood Detection features.
+Values: 1 to enable or 0 to disable.
+
+- Channel_Flood_Detection_Punish_Duration
+About: Decide the length in which to stick clients to a channel or ban off the
+server.
+Values: <Seconds>
+Example: 60
+
+- Channel_Flood_Detection_Punish_Reason
+About: Choose the kick/ban (45 characters) reason or private message for sticky
+channel punishments here. Default will use a predefined message for all of the
+above.
+Values: <Message For Client> or <Default>
+Example: 'Good Bye Goober!'
+
+- Channel_Flood_Detection_Time_Limit
+About: Here you choose the length in <seconds> a client has as a basic queue, for
+which the Channel_Flood_Detection_Tolerance count defines the peak amount of
+infractions a client can acquire within this limit.
+Values: <Seconds>
+Example: 15
+
+- Channel_Flood_Detection_Tolerance
+About: Decide how many channels a client can move through, and queue into the
+Channel_Flood_Detection_Time_Limit before being considered for punishment.
+If you have a Query_Limit that splits up your RbMod query reads, this may need
+some adjusting, as each client may not be read for longer durations, depending
+on client load and the max Query_Limit variable read limit every second.
+Values: <Limit>
+Example: 3
+
+
+__ Channel Language Filter _____________________________________________________
+
+Each room will be scanned against a list of 'bad words'
+(./rbm_extras/rbm_badwords.cf) but only when the name changes, or the channel's
+created for the first time. Set a desired interval in which to start scanning
+through channels for name variations.
+
+- Channel_Language_Filter_Interval
+Values: <Seconds>
+Example: 5
+
+- Channel_Language_Filter_On
+Values: 1 to enable or 0 to disable.
+
+
+__ Client Status Icon Group ____________________________________________________
+
+Watch for individual status changes of each client connected, If a user
+becomes idle over a set time (Client_Status_Idle_Time_Requirement), RbMod will
+reflect this with a 'Idle' icon, and subsequently when the duration exceeds the
+second set time (Client_Status_AFK_Time_Requirement) for the 'AFK' icon.
+The third icon 'Live' appears for anyone below the two previous settings.
+
+- Client_Status_AFK_Detect_Away
+About: If a client sets ones self to away or returned, would you like RbMod to
+change their status icon to 'AFK'?
+Values: 1 to enable or 0 to disable.
+
+- Client_Status_AFK_Time_Requirement
+About: Choose the time in which a client must remain idle before reaching 'AFK'
+Icon status.
+Values: <Seconds>
+Example: 1800
+
+- Client_Status_Idle_Time_Requirement
+About: Choose the time in which a client must remain idle before reaching 'IDLE'
+Icon status. A few minutes or so seems right.
+Values: <Seconds>
+Example: 180
+
+- Client_Status_On
+About: Turn on or off Client Status Icon(s) / Groups.
+Values: 1 to enable or 0 to disable.
+
+
+__ Clone Detection Icon Groups _________________________________________________
+
+RbMod will setup 7 Clone Groups, and place anyone with duplicate DBIDs into the
+necessary group.
+
+- Clone_Detection_On
+About: Turn on or off Clone Detection Groups.
+Values: 1 to enable or 0 to disable.
+
+
+__ Dynamic Banners _____________________________________________________________
+
+Choose a list of as many Banner Image URLs as you like. With the capability of
+changing the Banner LINK URLs on a independent time cycle. Change the banner
+link once every 2 banners, or choose which ever variation suites your setup.
+
+- Dynamic_Banner_On
+Values: 1 to enable or 0 to disable.
+
+- Dynamic_Banner_URL_Links
+About: Use either full 'http://' paths or trim the banner links down to simple
+domain names. Separate each link with ',' commas.
+Values: <URL>,<URL>,<URL>,<etc.>
+Example: http://www.teamspeak.com,www.rbmod.presension.com
+
+- Dynamic_Banner_URL_Links_Interval
+About: Choose how often in <seconds> to rotate through Dynamic_Banner_URL_Links.
+Values: <Seconds>
+Example: 3600
+
+- Dynamic_Banner_URLs
+Use either full 'http://' paths or trim the banner Image links down to simple
+domain names. Separate each image link with ',' commas.
+Values: <URL>,<URL>,<URL>,<etc.>
+Example: http://www.domain.com/imageA.png,www.domain.com/imageB.png
+
+- Dynamic_Banner_URLs_Interval
+About: Choose how often in <seconds> to rotate through Dynamic_Banner_URLs.
+Values: <Seconds>
+Example: 1800
+
+
+__ Group Protection ____________________________________________________________
+
+Select individual client DBIDs, and the corresponding group they belong to.
+If any client outside this list joins an unauthorized group, the client will
+immediately be revoked from the group and kicked if desired.
+
+- Group_Protected_GroupID_MemberIDs
+About: Choose a GroupID and the corresponding client DBIDs that belong with it.
+Values: <GroupID>->[<ClientDBID>,<ClientDBID>]
+Example: 2->[1,3],9->[4,5,1280,1937]
+
+- Group_Protected_Kick
+About: If this variable is set On, clients not whitelisted under
+Group_Protected_GroupID_MemberIDs will be removed from the protected group and
+kicked immediately. Otherwise the unauthorized client will only be removed from
+the protected group without a punishment of any kind.
+Values: 1 to enable or 0 to disable.
+
+- Group_Protected_On
+Values: 1 to enable or 0 to disable.
+
+- Group_Protected_Punish_Reason
+About: Choose a message after removing the client from an unauthorized group,
+and kicking off the server.
+Values: <Default> or <45 character kick message>
+Example: Default
+
+
+__ MOTD - Message Of The Day ___________________________________________________
+
+When first time clients connect to your TS3 server, RbMod will greet the user
+with the first message in ./rbm_motd.cf (accessible through the web interface),
+subsequent log-ins will receive the second message. Please see rbm_motd.cf for
+more custom variables related to the MOTD.
+
+- MOTD_On
+Values: 1 to enable or 0 to disable.
+
+
+__ Military Ranking - Group Icons ______________________________________________
+
+Pack 1 consists of 62 ranked icons, while pack 2 holds 27 more true to life
+insignias with names displayed privately for each. Set the the rank time
+requirements to start with, and watch client ranks update live online.
+Subsequent ranks become harder to reach,
+as each clients TOTAL time + scale + time / 3 = Next rank.
+
+- Military_Rank_Globally_Announce
+Inform the virtual server with serversendtextmessage, globally announcing each
+individuals ranked status up ranking up to the next level.
+Values: 1 to enable or 0 to disable.
+Example: 0
+
+- Military_Rank_Icon_Pack
+Decide if you like the 27 (smaller) ranked icon pack with the toggle 2, or
+choose pack 1 with 62 ranked icons. Be sure to reflect the icon pack you pick
+in Military_Rank_Requirements, as 27 ranks may require a longer duration here.
+Values: <1> or <2>
+Example: 2
+
+- Military_Rank_Interval
+How often should RbMod check for rank changes in the clientlist? Choose the
+interval in <seconds> here.
+Values: <Seconds>
+Example: 60
+
+- Military_Rank_On
+Values: 1 to enable or 0 to disable.
+
+- Military_Rank_Privileged_Client_DBIDs
+With this setting, you can bump up certain client DBIDs in rank while their
+time accumulated will also be added onto which ever level you start them at.
+seperate each with ',' commas.
+Values: <ClientDBID>-><RankLevel>
+Example: 334->15,289->10,286->10
+
+- Military_Rank_Privileged_Group_IDs
+With this setting, you can bump up certain groups in rank while their time
+accumulated will also be added onto which ever level you start the group at.
+separate each with ',' commas.
+Values: <GroupID>-><RankLevel>
+Example: 3->5,9->10,4->15
+
+- Military_Rank_Requirements
+Decide on a start position in <seconds>, progressively increasing each rank with
+an edition of time elapsed, divided by three.
+TOTAL time + Military_Rank_Requirements + (Total time / 3) = next rank.
+Values: <Seconds>
+Example: 3600
+
+
+__ Nickname Language Filter ____________________________________________________
+
+Similar to the Channel Language Filter, each client gets reviewed for a
+variation from the previous cached name the mod read a second prior, only once a
+name change is detected, will RbMod scan for bad words against the current user.
+
+- Nickname_Language_Filter_Ban
+About: If this toggle is used, RbMod will ban the client for a bad word match,
+rather then the default kick action.
+Values: 1 to enable or 0 to disable.
+
+- Nickname_Language_Filter_Ban_Time
+About: If Nickname_Language_Filter_Ban is enabled, set a ban duration for the
+client whom we are punishing for using a bad word.
+Values: <Seconds>
+Example: 3600
+
+- Nickname_Language_Filter_Exempt_On
+About: Drawing upon Query_Exempt_Group_IDs, this will exclude anyone you've
+previously listed under this variable.
+Values: 1 to enable or 0 to disable.
+
+- Nickname_Language_Filter_On
+Values: 1 to enable or 0 to disable.
+
+- Nickname_Language_Filter_Punish_Reason
+About: Choose your own message when RbMod kicks a client off the server for
+using bad language in their nickname.
+Values: <45 character kick/ban message> or <Default>
+Example: Default
+
+
+__ Nickname Protection _________________________________________________________
+
+Punish a client whom tries to steal a protected groups client nickname. Choose
+whether to punish the same group members for using a protected nickname as well.
+Don't forget to choose your own kick/ban reason.
+
+- Nickname_Protected_Ban
+About: Enabling this option will ban an infraction, rather than the default kick
+action.
+Values: 1 to enable or 0 to disable.
+
+- Nickname_Protected_Ban_Time
+About: If Nickname_Protected_Ban is enabled, decide the duration in <seconds> to
+ban protected client impersonating groups / clients in these groups.
+Values: <Seconds>
+Example: 3600
+
+- Nickname_Protected_Group_IDs
+About: List all the Groups here you wish RbMod to actively protect.
+If the protected client DBID / Group is offline, RbMod will look for the last
+known nickname belonging to this client, and match unprotected users against it.
+Values: <GroupID>,<GroupID>,<GroupID>,<etc.>
+Example: 2,9,37
+
+- Nickname_Protected_Interval
+About: This variable defines the interval in <seconds> in which Rb scans for
+nickname variations.
+Values: <Seconds>
+Example: 3
+
+- Nickname_Protected_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- Nickname_Protected_Punish_All
+About: Punish everyone, even those listed under Nickname_Protected_Group_IDs.
+Values: 1 to enable or 0 to disable.
+Example: 0
+
+- Nickname_Protected_Punish_Reason
+About: This 45 character kick / ban message can incorporate anything you like.
+You can also choose <Default> as the basic Ban response.
+Values: <Custom 45 character message> or <Default>
+Example: Default
+
+
+__ Oporating System On-Join Icon Detection _____________________________________
+
+Automatically detect Windows, Linux, Mac, iOS or Android devices upon connecting
+to your server, and visually display the appropriate icon.
+
+- OS_Detection_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+
+__ RBL - Real-Time Black Hole List ______________________________________________
+
+Upon joining the server, each client will be checked against an RBL DNS server
+of your choosing. Scan for trollers coming in with proxies that are well known
+on the internet. RbMod only incorporates one punishment, permanent ban of IP
+address and DBID. You can allow certain IP addresses through with
+RBL_Check_WhiteList variable. Uses 'nslookup' and the command prompt.
+
+- RBL_Check_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+RBL_Check_WhiteList
+About: Choose <IP Addresses> which will remain exempt from any punishments.
+Values: <IP Address>,<IP Address>,<etc.>
+Example: 141.179.4.138,206.212.116.154
+
+- RBL_Server
+About: Decide which RBL DNS server RbMod will check against for every client.
+Values: <RBL DNS Address>
+Example: xbl.spamhaus.org
+
+
+__ Reverse DNS Detection _______________________________________________________
+
+Display each client's reverse DNS record, if found via your operating systems
+nslookup. For informative purposes only.
+
+- Reverse_DNS_Display_Privately
+About: Decide whether or not to send an personal message to the client, but if
+MOTD_On variable is already displaying the DNS, you can leave this off.
+Values: 1 to enable or 0 to disable.
+Example: 0
+
+- Reverse_DNS_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+
+__ Traceroute Visual Detection - Icon Pack(s) __________________________________
+
+With this feature enabled, RbMod will perform back to back traces upon each
+new connection (unless cached) to provide the most realistic path(s) taken,
+subsequently displaying the highest hop count to your TS3 server in icon form.
+Requires permissions to access your systems 'tracert' or 'traceroute' command
+line tools, depending on your operating system.
+
+- TraceClients_Cache
+About: Decide the length in which RbMod caches trace results. This will display
+and icon upon re-connections quicker, and also reduce excess ICMP / TCP SYN
+Packets outbound from RbMod.
+Values: <Seconds>
+Example: 259200
+
+- TraceClients_Dual_Trace
+About: You have the choice of performing just one trace, or two with this
+variable enabled.
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- TraceClients_Icon_Pack
+About: RbMod comes with 4 packs of 1-40 icon packs (icons 40+ if beyond), choose
+the pack which suites your icon theme the most.
+Values: <1-4>
+Example: 4
+
+- TraceClients_On
+Values: 1 to enable or 0 to disable.
+Example: 1
+
+- TraceClients_Trace_1_Type
+About: Choose the first trace method to perform upon new connections/un-cached
+clients.
+Values: <TCP> or <ICMP>
+Example: TCP
+
+- TraceClients_Trace_2_Type
+About: Choose the second trace method if TraceClients_Dual_Trace is enabled.
+Values: <TCP> or <ICMP>
+Example: ICMP
+
+
+__ Traffic Meter - 289 Icons Pack ______________________________________________
+
+Based upon each clients bytes Sent and Received, RbMod will visually display
+the current traffic for each client connected. Animating the process via 289
+icons based upon the traffic position.
+Note: RbMod uses the 'client_icon' slot for this feature, if you desire custom
+icons for clients, its suggested to either leave this feature off, as it will
+overwrite online client slots, or possibly make individual groups for each
+client.
+
+- Traffic_Meter_On
+Values: 1 to enable or 0 to disable.
+Example: 1

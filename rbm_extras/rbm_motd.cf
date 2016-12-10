@@ -1,0 +1,75 @@
+﻿#-----------------------------------------------------------------
+# FIRST log-ins receive this Message Of The Day (MOTD).
+#
+# Enclose each command with [ and ]. Example: Hello [nick]!
+# All Teamspeak BB Codes should work just the same.
+#
+# Available Commands are listed below (Note: First time client
+# connections are not stored in Rb's DB, this means more variables
+# in the second MOTD message below.)
+#
+# Nick, Version, IP, OS, DNS, RandQuote, RandWord, RandQuoteWord.
+# Country, Start, Break, End, \t
+#-----------------------------------------------------------------
+[Start]
+
+[COLOR=RED]
+Welcome [B][Nick][/B]!
+\tI notice this is your first time here from [Country],
+\tplease feel free to browse around. 
+\tYour Teamspeak3 version is [Version] on [OS].
+\tYour IP is [IP]
+
+[B]RbMod:[/B]
+\t[URL=http://rbmod.presension.com]RbMod at Presension.com[/URL]\t[URL=http://addons.teamspeak.com/directory/tools/miscellaneous/%D0%AFbMod-Perl-Modification.html]RbMod at Teamspeak.com[/URL][/COLOR]
+
+[COLOR=MAROON][B]Random Word:[/B][/COLOR]
+\t[COLOR=BLUE][RandWord][/COLOR]
+
+[End]
+#-----------------------------------------------------------------
+# SUBSEQUENT log-ins receive this Message Of The Day (MOTD).
+#
+# Available Commands Are Listed Below:
+#
+# NEW: [Break] split the message into multiple messages at every
+# [Break], RbMod will also split large messages every 1024
+# characters if [Break] cannot be found. Be sure to watch your
+# start and finish BB tags, once a message is split.
+#
+# Nick, Version, IP, OS, DNS, RandQuote, RandWord, RandQuoteWord,
+# LastLoginTime, LastLoginElapsed, LastChan, Hops, Rank, Country,
+# FirstLoginTime, FirstLoginElapsed, MBSent, MBRecv.
+# Start, Break, End, \t
+#-----------------------------------------------------------------
+[Start]
+[COLOR=MAROON]
+Welcome back [B][Nick][/B] from [Country].
+\tYou were in channel [LastChan], on [LastLoginTime].
+\tAbout: [LastLoginElapsed]
+[/COLOR][COLOR=FireBrick]
+\tIP Address:\t\t[IP] ([DNS])
+\tData Recv: \t\t[MBRecv]
+\tData Sent:  \t\t[MBSent]
+\tConnections:   \t[Connections]
+\tVersion:   \t\t\t[Version] on [OS]
+\tTime Rank:  \t\t[Rank]
+\tHop Count:  \t\t[Hops]
+[/COLOR][COLOR=MAROON]
+\tYou first joined on [FirstLoginTime].
+\tThis was [FirstLoginElapsed]..
+
+[B]RbMod:[/B]
+\t[URL=http://rbmod.presension.com]RbMod at Presension.com[/URL]\t[URL=http://addons.teamspeak.com/directory/tools/miscellaneous/%D0%AFbMod-Perl-Modification.html]RbMod at Teamspeak.com[/URL][/COLOR]
+[Break]
+
+[COLOR=MAROON][B]Random Word/Quote[/B][/COLOR]
+\t[COLOR=FireBrick][RandQuoteWord][/COLOR]
+
+[COLOR=MAROON][B]Links[/B][/COLOR]
+\t[COLOR=FireBrick][URL=http://rbmod.presension.com]rbmod.presension.com[/URL] (Ports 80 & 9987)[/COLOR]
+\t[COLOR=FireBrick][URL=http://rbmod.presension.com/viewforum.php?f=17]Public Inn Forum[/URL] - Server Announcements[/COLOR]
+
+[COLOR=MAROON][B]Try !help for available triggers.[/B][/COLOR]
+
+[End]   

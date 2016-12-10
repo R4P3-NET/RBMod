@@ -1,0 +1,829 @@
+﻿ ,============================================================================.
+ |             ____     __                             __                     |
+ |            /\  _`\  /\ \       /'\_/`\             /\ \                    |
+ |            \ \ \L\ \\ \ \____ /\      \     ___    \_\ \                   |
+ |             \ \ ,  / \ \ '__`\\ \ \__\ \   / __`\  /'_` \                  |
+ |              \ \ \\ \ \ \ \L\ \\ \ \_/\ \ /\ \L\ \/\ \L\ \                 |
+ |               \ \_\ \_\\ \_,__/ \ \_\\ \_\\ \____/\ \___,_\                |
+ |                \/_/\/ / \/___/   \/_/ \/_/ \/___/  \/__,_ /                |
+ |                                                                            |
+ |                   RbMod (Responsive Bot Modification)                      |
+ |             Copyright (C) 2013, Matthew Weyrich - Scor9ioN                 |
+ |                          admin@presension.com                              |
+ |                                                                            |
+ |                           v3.2.4 Pre-release                               |
+ `============================================================================`
+
+
+   + Added feature or noticeable improvement
+   - Bug fix or something removed
+   * Changed or Information
+   ! Important - Take note!
+===============================================================================
+
+=== Release 3.2.4 ( Novemeber 13 2013 PRERELEASE ) ===
+
+- Fixed the traffic meter and automove feature subroutines in this release
+- Increased cache read from once a second to 2-3 a second.
++ Added Subscribe_To_Rb_Online_Server_List_* feature.
+
+
+=== Release 3.2.3 ( Aug 12 2013 ) ===
+
++ Added the possibility to add multiple RBL servers to 'RBL_Server' setting,
+  separated by commas.
++ Added rbm_setting.cf:
+  1) Channel_Info_Switching_On = (1/0) - PM client last active channel user.
+* Added a few more triggers. Type !help
+* Changed OS Groupname from 'Mac' to 'OS X'.
+* Changed Serverquery login data accumulating unnecessarily in rbm_query.cf.
+* Changed The weather / geo features to use separate .pl files under rbm_tools/
+  This new version will only use fork() calls for the main mod instance(s),
+  no longer will individual fork replication occur for new client connections,
+  in turn reducing overall memory consumption for RbMod.
+- Fixed RBL watching for IP changes & rescanning when change detected.
+
+
+=== Release 3.2.2 ( June 29 2013 ) ===
+
+- Fixed Rank System causing a hang / delay in the mod if a certain rank was
+  created.
+- Fixed repeating weather 'No Matching Places Found' STDOUT to console.
++ Added 'Channel_Delete_Dormant_Trash_Icon_Requirements' to rbm_settings.cf.
+  Choose a time before the channel delete requirement to add a trash can
+  icon beside the channel & description update, indicating the channels status.
++ Added icon rbm_icons/Icons_ChannelDelete/icon_301694691
+
+=== Release 3.2.1 ( June 26 2013 ) ===
+
+* Separated 95% of the fork() features into individual Perl files
+  (./rbm_tools/*). This means less memory & CPU consumption all around, plus
+  Windows servers shouldn't run into the fork() interpreter limitation(s).
+    ./rbm_tools/rbm_dns.pl
+    ./rbm_tools/rbm_geo.pl
+    ./rbm_tools/rbm_irc.pl
+    ./rbm_tools/rbm_ping.pl
+    ./rbm_tools/rbm_rbl.pl
+    ./rbm_tools/rbm_rss.pl
+    ./rbm_tools/rbm_trace.pl
+    ./rbm_tools/rbm_weather.pl
+* Slowed Channel Delete Dormant rooms (Won't spam the socket with !clean..)
+- Fixed Exemption Subroutine printing results to STDOUT (Shell/Cmd Prompt).
+- Fixed 0ms pings previously displayed as 1ms.
+- Fixed ./rbm_stored/ cf creation upon new installs. If rbm_channels/clients
+  .cf files are missing, the mod will create new ones and continue to boot.
+! Replaced Net::Ping module for custom light weight code.
+
+## rbm_settings.cf (171 variables total) ##
++ Added
+    IRC_Bot_Port - Choose your own IRC port..
+    IRC_Bot_AutoOp - Auto-O list of IRC Operator IP addresses.
+    IRC_Bot_AutoVoice - Auto-V list of IRC Voiced IP addresses.
+    Ping_Meter_Interval - Set the time in seconds to ping client(s).
+- Removed
+    Ping_Meter_Icon_Pack
+ 
+
+=== Release 3.2 ( June 15 2013 ) ===
+
++ Added Away Status Language Filter
++ Added IRC bot.
++ Added !clean to quickly cleanup dormant channels immidiatly
++ Added !irc <IRC Commands>
++ Added ./rbmod (-quite or -silent) command line arguments to muffle the spam
+  during the mods bootup sequence in your TS3 global chat.
++ Added ./rbmod -debug command line argument. Force debug on.
+- Optimized Temperature lookup procedure.
+* Renamed rbm_help.cf to HELP
+* Updated HELP. From 100 previous written variables to the complete 172.
+* Updated !Help
+
+## rbm_settings.cf (168 variables to date) ##
+
++ Added
+    Client_Away_Status_Language_Filter_On
+    Automove_Client_AFK_Exempt_Channel_IDs
+    IRC_Bot_On
+    IRC_Bot_Label
+    IRC_Bot_Server
+    IRC_Bot_Nick
+    IRC_Bot_Nick_Alternative
+    IRC_Bot_Login
+    IRC_Bot_Channels
+
+* Removed
+    Autofill_Empty_CCode_Slots_Icon_Pack
+    OS_Detection_Icon_Pack
+    Status_Icon_Pack
+
+* Changed
+    ChannelName_Language_Filter_On
+    ChannelName_Language_Filter_Interval
+  To
+    Channel_Name_Language_Filter_On
+    Channel_Name_Language_Filter_Interval
+
+=== Release Ƹ (Beta 1f) ( April 15 2013 ) ===
+
+- Fixed Ping Meter code error for secondary IP address look-ups.
+- Fixed Geo::IP::PurePerl binary data output encoding. Now in sync with UTF-8.
+- Fixed bug it on-join auto-move (channelfind Country regexp).
+- Fixed on-join reconnect gauge writing incorrect data to the DB.
+- Fixed shutdown sequence with ctrl-C.
+* Increased the speed of Geo::IP::PurePerl lookups (Uses more memory for speed)
+  New rbm_settings.cf Toggle: 'Package_GeoIP_UseMemSpeed = 1/0'.
+* Delayed Tagline / Weather & Distance messages to the global chat by a second
+  or so longer.
+
+
+=== Release Ƹ (Beta 1e) ( March 31 2013 ) ===
+
++ Removed 'Rb' prefix before group names
++ Adjusted the onjoin weather results / user distance to display back to back
+  (less verbose).
++ Adjusted the weather / temperatures to calculate ones IP subnet if undefined.
++ Adjusted the group removal speed, increased by 100%.
+- Fixed Onjoin Taglines/descriptions not displaying properly since Beta 1b.
+- Fixed other minor bugs.
+
+
+=== Release Ƹ.1 (Beta 1) ( February 05 2013 ) ===
+
++ Added Mod FEATURE - Auto Update
+  Poll for mod updates, & subsequently download any new updated archives
+  via booting up RbMod and comparing your version to the online release version.
+  Downloaded archives are stored at the root of RbMod.
+  ! This feature may eventually auto-update the contents of preexisting files.
+
++ FEATURE - Ping Meter
+  Independent of the TeamSpeak query interface, this new feature will attempt
+  to either use the built in module 'Net::Ping' to ping a client IP directly,
+  if an ECHO or TCP ping fails, it will fall back to a trace-route to obtain
+  either the clients ping directly, or from the first hop or two in front of
+  the specific client.
+
++ FEATURE - Sticky Channel for administrators to drag & drop client
+  punishments. Place anyone that's been spamming your server directly into
+  a selected channel ID of your choice - The server group 'Rb Sticky' will
+  automatically attach to the offending client - until dragged back out of
+  the specific channel you've chosen.
+
++ FEATURE - Client description language filter.
+  Monitor all client descriptions for swear words from the rbm_badwords.cf
+
++ FEATURE - On-join client description / tagline global message.
+  Append either a 200 character !tag <here> to display globally to all your
+  buddies upon joining the server. !deltag to remove Rb custom saved tagline.
+  If the client doesn't choose a !tag, the description field from TS3 will be
+  used instead (max of 80 characters). Admins can set client on-join tags
+  easily with the later.
+
++ FEATURE - On-part random color coded goodbye messages.
+  RbMod now uses another *.cf file (/rbm_extras/rbm_goodbye.cf) to globally
+  text message a random color coated departure message for every 3rd-4th
+  disconnection a client makes (independent of other disconnects). This
+  feature uses over 1100 HEX color codes to generate 'rainbow' type
+  message effects.
+
++ FEATURE - Geographical Database
+  Dependent upon 'Geo::IP::PurePerl' CPan module & rbm_settings.cf On/Off
+  toggle, RbMod can now pickup a clients City/Region (database permitting)
+  and further utilize these results in other features such as the on-join
+  channel creation feature or weather statistics to name a few. This
+  feature is disabled by default until both the Geo::IP::PurePerl is installed
+  ('cpan' .. 'install Geo::IP::PurePerl') and the free 'GeoLite City' BINARY
+  database that this module utilizes is correctly placed at the root of RbMod.
+  '/GeoLiteCity.dat'
+  'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz'
+
++ FEATURE - Weather Conditions
+  With 'Geo::IP::PurePerl' correctly running and enabled
+  under rbm_settings.cf, our second dependency in which to obtain user
+  temperatures comes in the form of 'Weather::Underground'. This module,
+  when installed (cpan> 'install Weather::Underground') will enable
+  certain temperature statistics to appear next to a clients on-join
+  'status' group for a short period, as well as a global Celsius
+  / Fahrenheit / Conditions global message upon first connections.
+  There's of course the more permanent feature 'Temperatures_On'
+  that utilizes 85 temperature icons (from -33c - +50c), updated
+  on a set interval for all online connections.
+
++ FEATURE - RSS Feeds
+  With the use of 'XML::Parser' module, RbMod can now attach to a URL of
+  your choosing and monitor the contents for changes, globally displaying
+  the results with a interval variable.
+
++ FEATURE - Reconnect Flood Detection Gauge.
+  Written in hopes of reducing client re-connections, either intentional
+  or from simple repetitive timeouts due to poor client connections, this
+  feature will monitor the amount of reconnects under a set period of time,
+  each infraction will escalate to further warn, kick & inevitably a ban.
+  There's about 6 tiers to this 'grey' list the mod uses to watch ones
+  reconnect history.
+
++ FEATURE - Channel Query 'Bots'.
+  Designed intentionally to tap into Screech's 'Now Playing' Music ->
+  Channel Plugin. Setup one or more query bots in specific channel(s)
+  to watch a target channels text history. Each line from the channel
+  chat will immediately go beside a specified client DBID, displaying
+  for example the first 30 characters of a song beside a GUI client
+  connected in the form of a group 'tag' in brackets, as well as
+
+  changing the targets description to show 0-80 characters of the
+  channel text monitored.
+
++ Added ICONS - 31 new Ping Meter icons. Resembles a color wheel (CD Disc).
+
++ Added ICONS - 5 new O/S icons.
+
++ Added ICONS - 85 new Temperature icons.
+
++ Added ICONS - Third Military pack of 27 ranked icons.
+
++ Added ICONS - 238 country code icons (Utilized with Pure-Perl module enabled.)
+
++ Added ICON - Ethernet wire icon for internal clients.
+
+* Changed Auto-Fill feature to either place a question mark near unknown Country / IP
+  ranges, or an Ethernet wire for internal IP addresses & or the choice of a country
+  flag if one hasn't been detected by TS3's built in GEO DB.
+
+* Changed Traffic Meter for better performance
+
+* Changed the method in which clients use feature groups. Clients now share identical
+groups. Groups are only created if called, and destroyed when empty. The only two
+feature groups which are still tied independently to a client are the Ping and Status
+features. Switching clients between these two features from group to group when ever
+a new icon is required, introduces too much global and client-side spam IMO.
+
+- BUG FIXED in Ranking (Next rank calculations were off)
+
+- Minor Bug fixes and code enhancements through out the entire Mod.
+
+! Over 950 Icons in version Ƹ.1
+
+! KNOWN BUG #1 Sometimes negative temperatures display positive icon results under the
+  new temperature icon/group feature. This is will be ironed out.
+
+! KNOWN BUG #2 Sometimes the auto-move skips a beat creating / moving a client to the
+  new auto channel creation feature (Country->Region->City).
+
+! Some minor RSS and new features need a little work still, and possibly some more
+  rbm_settings.cf variables for all the new features as well.
+
+
+=== Release 2.0 Beta 9 ( December 21 ) ===
+
++ Added 'Database_Active_Clients_Cache_Time'
+  Auto-delete clients from RbMod after a particular amount of time in seconds.
+
++ Added 'Exclamation_Triggers_Admin_Group_IDs'
+   Choose the Administrator GroupID's allowed to !purge and !purgematch.
+   *More !triggers coming soon.
+
++ Added 'Automove_Client_Idle_Return_To_Channel_On'
+   Auto-move clients back to previous room after returning.
+
++ Added 'Recording_Detect_On'
+   Turn on or off auto-kick for recording
+
++ Added 'Recording_Detect_Exempt_Group_IDs'
+   Choose the groups exempt from recording kick.
+
++ Added 'RBL_Check_Cache'
+   Choose how long to cache RBL look-ups on IP addresses. As not to overwhelm
+   an RBL server on busy TS3 servers.
+
+* Changed 'Client_Status_AFK_Detect_Away' to 'Status_AFK_Detect_TS3_Away'
+* Changed 'Client_Status_AFK_Time_Requirement' to 'Status_AFK_Time_Requirement'
+* Changed 'Client_Status_Idle_Time_Requirement' to 'Status_Idle_Time_Requirement'
+* Changed 'Client_Status_On' to 'Status_On'
+
+! Traffic Meter - Icon Changes (256 vs 289 total icons):
+! Trace Icon Packs - Trimmed each pack down to 30 from 41.
+
+* Changed Trace Icon Pack 2 to a whole new theme.
+
++ Added 60 custom game icons which I created for Beta 9, display the current
+  game you're playing with !playing <Game acronym>, and !stopplaying to drop
+  the tag/icon.
+ 
++ Added !seen <nickname> Look-up your buddies last online / channel information.
+
++ Added !purge <clientnickname> and !purgematch <purge_every_nickname_searched>
+  for administrators. Cleans out clients both from the TS3 DB and Mod Database.
+
++ Added Screenshots of each icon category. And an overall screenshot to the
+  root of ./rbm_icons/
+
+* Changed ./rbm_icons/* to a categorized sub-folder layout. Upload the icons
+  for the current feature you have enabled or icon pack you've chosen. Leave
+  the rest off your TS3 server for later use.
+
+= Release 2.0 Beta 8r2 Included:
++ Added 'Query_Name2'
++ Added 'Military_Rank_Privately_Announce'
++ Added 'Autofill_Empty_CCode_Slots_Sort_Order'
++ Added 'Client_Status_Sort_Order'
++ Added 'Clone_Detection_Sort_Order'
++ Added 'Default_Guest_Group_Sort_Order'
++ Added 'Military_Rank_Sort_Order'
++ Added 'OS_Detection_Sort_Order'
++ Added 'TraceClients_Sort_Order'
++ Added 'RBL_Ban_Punish_Reason'
++ Added 'Exclamation_Triggers_On'
+
+* Changed 'Autofill_Empty_CCode_Slots' to 'Autofill_Empty_CCode_Slots_On'
+* Changed 'Channel_Flood_Detection_Channel_SortOrder' to 'Channel_Flood_Detection_Channel_Sort_Order'
+
+
+=== Release 2.0 Beta 8 ( November 28th ) ===
+
+! NOTE Auto-Move 2 Digit CCode Feature
+  This will move anyone that's not designated for Auto-Move already to a 2 digit
+  Country Code. If for example, you have 'Canada (CA)' or '(CA) Canada' as a
+  channel name, RbMod will place Canadian users joining the server to this 2 digit
+  CCode example. You can place the CCode tag on any channel you desire of course.
++ Added 'Automove_Member_To_CCode_On'
+- Removed 'Idle_Move_On'
+- Removed 'Idle_Move_Time_Requirement'.
+- Removed 'Idle_Move_Exempt_Group_IDs'
+- Removed 'Idle_Move_Channel_ID'
++ Added 'Automove_Client_Idle_On'
++ Added 'Automove_Client_Idle_Time_Requirement'
++ Added 'Automove_Client_Idle_Exempt_IDs'
++ Added 'Automove_Client_Idle_Channel_ID'
+
+- Removed 'Automove_Member_Client_Notice'
+- Removed 'Automove_Member_Client_Notice_On'
+- Removed 'Automove_Member_To_Channel_Client_DBIDs'
+- Removed 'Automove_Member_To_Channel_Group_IDs'
+- Removed 'Automove_Member_To_Channel_On'
++ Added 'Automove_Client_OnJoin_DBIDs'
++ Added 'Automove_Client_OnJoin_Group_IDs'
++ Added 'Automove_Client_OnJoin_Notice'
++ Added 'Automove_Client_OnJoin_Notice_On'
++ Added 'Automove_Client_OnJoin_To_CCode_On'
+
+! NOTE Client Status feature
+  Watch for individual status changes of each client connected, If a user
+  becomes idle over a set time, RbMod will reflect this with a 'Idle' icon,
+  and subsequently when the duration exceeds a second set time for the 'AFK' icon.
+  The third icon 'Live' appears for anyone below the two previous settings.
++ Added 'Client_Status_AFK_Time_Requirement' variable.
++ Added 'Client_Status_Idle_Time_Requirement' variable.
++ Added 'Client_Status_On' variable.
+
++ Added 'RBL_Server' variable - Choose your own RBL DNS server.
+
+! NOTE Auto-Fill Icon slot with a blank icon, if no CCode detected (LAN etc.)
+  This lines up icons for both sets of clients nicely. 
++ Added 'Autofill_Empty_CCode_Slots'
+
+* Changed 'Channel_Delete_Dormant_Exempt_IDs' to allow a range of channel ID's.
+  Example with 3 exempt channel IDs and a range together: 1,[4-8],13
+
+* Minor changes to the group(s) creation, and organization amongst other groups.
+* Minor speed increases and performance optimizations.
+* Miscellaneous bug fixes.
+* 100 editable settings to date.
+
+- Removed Old Traffic Meter Icon Pack - 289 squared / dark blue & red icons.
++ Added New Traffic Meter Icon Pack - 289 rounded / light blue & red icons in
+  replacement.
+
+- Removed 'Onjoin_Welcome_Back_On'
++ Added 'MOTD_On' in replacement.
+
+=== Release 2.0 Beta 7 ( November 16th ) ===
+
++ Added 'Default_Guest_Group_Name', choose the name of RbMod duplicated
+  guest group
+
++ Added O/S Detection 5th icon for Android devices:
+  ./rbm_icons/icon_118227499
+
+* Changed the method and increased the speed in which new Rb groups are created.
+
+* Renamed rbm_settings.cf 'Virtual_Port' variable to 'Query_Virtual_Port'.
+
+* Renamed rbm_settings.cf 'Exempt_Group_IDs' variable to 'Query_Exempt_Group_IDs'.   
+
+* rbm_settings.cf formatted alphabetically for the new web interface.
+
++ Added 7 new rbm_settings.cf variables:
+  WebServer_On
+  WebServer_Login
+  WebServer_Password
+  WebServer_Address
+  WebServer_Port
+  WebServer_Client_Limit
+  WebServer_Client_WhiteList
+
++ Added stand-alone web server ./rbm_webserver/* (1329k)
+
++ Added website interface. Setup a port in which to listen for incoming HTTP
+  requests from any white listed client you choose. Reboot, Reconnect, Edit
+  the settings.cf and MOTD, check RbMods database and purge clients.
+  More work yet to come for this new feature.
+
++ Added RBL (Real-time Blackhole List) feature.
+  With this new feature enabled, every new client will be checked (via nslookup)
+  against the online RBL at DNS zen.spamhaus.org. White list any IP addresses
+  that are known to be friendly.
+  RBL_Check_On
+  RBL_Check_WhiteList
+
++ Added Idle-Move Feature.
+  Choose which groups to skip over as this feature will move any client found
+  idling over a set amount of time to a chosen channel ID. Thx Dan22
+  Idle_Move_On
+  Idle_Move_Channel_ID
+  Idle_Move_Time_Requirement
+  Idle_Move_Exempt_Group_IDs
+
+- Fixed bytes sent and received storing to RbMods database for the MOTD.
+
+! KNOWN ISSUES:
+  The Web interface may glitch and require a second click from time to time.
+  I'll be fine tuning this feature through-out the next few updates.
+
+=== Release 2.0 Beta 6 ( October 7th ) ===
+
++ Added Auto-Reconnect. RbMod should detect at any time when the TS3 virtual
+  server goes offline, and attempt to reconnect ('Query_Retry') X amount of
+  times before giving up. 
+
++ Added Group Protection. Upon joining your server, or being added to any new
+  groups, each client will be scanned against a list of protected DBIDs of
+  your choosing, and the corresponding group they belong to.
+
+  4 new rbm_settings.cf variables;
+  Group_Protected_On
+  Group_Protected_GroupID_MemberIDs
+  Group_Protected_Kick
+  Group_Protected_Punish_Reason
+
+
+=== Release 2.0 Beta 5 ( October 6th ) ===
+
+- Fixed Nickname Protection from booting 'TeamSpeakUser' clients if guarded
+  clients happen to grab it.
+
+* Changed the Channel Language Filter renaming routine, RbMod now replaces each
+  swear word with a random word selected from ./rbm_extras/rbm_funwords.cf.
+
+* Changed the Channel Delete Dormant clean-up procedure, any dormant
+  sub-channels UNDER an exempt parent channel will be cleaned up now, before
+  any channel in the tree that was added to the exemption list also remained
+  exempt. RbMod now delete dormant channels DOWN the tree that are under these
+  exemptions. This means you can add clan channels for example, and any
+  sub-channels they make (perm. or otherwise) will be cleaned up if it remains
+  empty beyond the 'Channel_Delete_Dormant_Requirements' variable.
+
+
+=== Release 2.0 Beta 4 ( October 3rd ) ===
+
++ Added [RandQuote], [RandWord], [RandQuoteWord] to the MOTD text file.
+  Choose whether you would like to display a random quote, random word meaning
+  or either of the two randomized when new clients connect and receive the MOTD.
+
++ Added [Break] to rbm_motd.cf, split up long messages above 1024 characters.
+  RbMod will also split long MOTD's without [Break] now but this adds a cleaner,
+  more accurate split to your welcome message(s).
+
++ Added 'Military_Rank_Privileged_Group_IDs' and
+  'Military_Rank_Privileged_Client_DBIDs' to rbm_settings.cf, on behalf of
+  Dan22's suggestion, you can now list which client ID or group ID's belong
+  to a particular starting rank of your choosing. For example; Registered
+  clients could start at rank 5 while serveradmins start at rank 15.
+  'Military_Rank_Privileged_Group_IDs = 989->15'
+
+* Changed the character limit back to normal. Beta 3 stripped text characters
+  over 127 for a few versions.
+
+- Fixed Motd displaying one extra hop per client.
+
+- Fixed 'Query_Limit' slowing down new client connections from being detected
+  by the Mod. Shouldn't matter how many clients or how many intervals it takes
+  to scan over every client, new joins will be prioritized and scanned over.
+
+- Fixed Channel Language Filter ignoring scan on new channel creations.
+
+- Fixed Channel Language choking on certain ASCII characters.
+
+- Fixed 'Channel_Flood_Detection_Exempt_On' now works correctly.
+
+
+=== Release 2.0 Beta 3 ( October 1st ) ===
+
+- Removed buffered socket reads.
+
+- Removed 'Traffic_Meter_Interval'
+
+- Fixed Clone departures enhancing user time, when only a single clone should
+  of been triggering the update.
+
+- Fixed / Slowed the Group Cleaner, cleans 1 group every 0.5 seconds, as not
+  to throttle your TS3 query interface.
+
+- Fixed Nickname Protection doubling / flooding during boot-up, potentially
+  causing unnecessary CPU consumption at the beginning.
+
++ Added Tx / Rx information while debug is on at the command prompt / shell.
+
++ Added Unbuffered socket READ subroutine. RbMod now reads all open socket
+  data until it hits a newline, or 0 bytes in the stream.
+
++ Added 'Clone_Detection_On' On / Off variable to hide or display RbMods
+  Icon pack of 7 clones.
+
++ Added 'Query_Limit' flag, overrides depreciated flag 'Traffic_Meter_Interval'
+  No longer worry about RbMod throttling your TS3 query port.
+ 
+  Every additional query you add to the Query_Limit will split the way RbMod
+  reads all your clients.
+
+  For example, if you have 18 clients connected, and you set
+  Query_Limit = 10, RbMod will read 10 clients one second, and 8 the next.
+
+  Type 'Debug On' at the console and watch the Tx / Rx from RbMod <-> TS3 to
+  better understand how much input RbMod receives from TS3 with X amount of
+  queries set.
+
+
+=== Release 2.0 Beta 2 ( September 24 ) ===
+
++ Added Help / Exit / Say <msg> / Shutdown / Reload / Debug <On/Off> and more
+  commands to the Terminal / Console for RbMod Sysops.
+
++ Added UTF8 Support throughout the Mod.
+
++ Added ANSI Color support to the Terminal / Console.
+
++ Added MOTD Two customizable areas included, first area will greet new joins
+  to the server with a message of your choosing, the latter greets subsequent
+  log-ins, with RbMod variables to play with for both. All TS3 text formatting
+  also works.
+ 
+  Some RbMod MOTD Commands you can use...
+  Nick, Version, IP, LastLoginTime, LastLoginElapsed, LastChan, Hops, Rank,
+  DNS, FirstLoginTime, FirstLoginElapsed, MBSent, MBRecv and more to come.
+
+  Short Message Of The Day example:
+
+  Welcome to the server [B][Nick][/B]!
+  I notice this is your first time here,
+  please feel free to browse around.
+  Your Teamspeak3 version is [Version].
+  Detected OS: [OS].
+  Your IP: [IP].
+ 
+  Make updates to the .cf and RbMod will automatically detect the change and
+  reload the file. This is a fairly new feature which still needs some work
+  over the next few releases.
+
++ Added flag 'Query_Retry', select how many connection attempts to make
+  before giving up.
+
++ Added flag 'Query_Retry_Delay', pick the length in which to wait between
+  retries.
+
++ Added flag 'Console_Text_Color', choose the default console color in which
+  to run RbMod in. Choices are; Red, Green, Yellow, Blue, Magenta, Cyan or
+  White
+
+- Removed temporary settings flag 'Cleanup_TS3_And_Shutdown' since this is
+  performed at every boot-up / soft shutdown.
+
+- Fixed Socket reconnect on failed attempts.
+
+- Fixed up Terminal / Console formatting.
+
+- Fixed Mod hanging after renaming a channel for bad word matches.
+
+- Fixed Time remaining until next rank. Time was a tad off.
+
+- Fixed Cleaning of 'Rb Sticky', 'Rb iOS', 'Rb Windows'. ALL groups should
+  cleanup every boot-up or upon typing 'exit' now.
+
+- Fixed Language filter skipping a beat from time to time on channel names.
+
+- Other minor bug fixes.
+
+
+=== Release 2.0 Beta 1 ( September 20 ) ===
+
+! 100% Rewritten Mod engine / features.
+
+! Windows and Linux compatible now.
+
+* Reduced CPU / Memory consumption significantly.
+
+* Added more icon options. Total of 575 icons in RbMod v2.0!
+
+* 1 Thread (Process) vs two, plus tens if not hundreds in RbMod v1.
+
+* 1 Query Socket vs two, plus tens if not hundreds in RbMod v1.
+
+* Independent Flat File Database, vs 3rd party SQ-Lite install in RbMod v1.
+
+* The Default Guest group for RbMod replicates your servers guest group now.
+  This takes place every boot-up. No need to edit a .cf file any longer.
+
+! Some 'light' features such as quotes and random word meanings are still
+  missing in this version. I'll be sure to program these ASAP.
+
+! 4 new features added. Ranking (Icon) System. Auto-Move Clients & Groups.
+  Auto-Delete dormant channels. Reverse DNS detection for clients. And more
+  yet to come.
+
++ TRAFFIC METER - One of RbMods largest attractions has now been rewritten
+  to produce the smoothest possible output for your TS3 server. In the
+  previous RbMod releases, all the dynamic icon updates took place in a
+  group generated per client. Since discovering that this method has it's
+  limitations (most apparent; CPU cycles generated for each icon update),
+  RbMod now uses the 'Client' icon slot instead, which pans out to be much
+  less overhead on the TS3 server processing the image updates. There's
+  also an interval toggle to slow down this particular feature if need be.
+
++ RANKING - Inspired by the gaming community and a few individuals, RbMod
+  now includes 2 icon packs to choose from. Pack 1 consists of 62 ranked
+  icons, while pack 2 holds 27 more true to life insignias with names for
+  each. Set the the rank time requirements to start with, and watch client
+  ranks update live online on. Subsequent ranks become harder to reach as
+  each clients TOTAL time + scale + time / 3 = Next rank.
+
++ TRACE ROUTE - Rewritten to produce a finer output than it's previous
+  predecessor in RbMod v1.0. This version now includes the default option
+  of performing a back to back trace per client. Using either ICMP / SYN
+  in Linux or just finding the highest path possible. Also includes a 4th
+  Icon pack of 41 new hop numbers (Default orange theme).
+
++ REVERSE DNS - Strictly for informative purposes, you can issue private
+  messages to new joins depicting the reverse DNS from their ISP.
+
++ CLONE DETECTION - Unlike version 1, this new clone detection uses a
+  completely new icon pack of 7 human figure icons. each lighting up
+  depending on the amount of clones per individual DBID. Future plans
+  to detect cloned IP's are in the works like version one held.
+
++ O/S DETECTION - Automatically detecting Windows / Linux / Mac or iOS
+  clients and visually displaying the appropriate icon. Four slightly
+  reworked OS icons have been added to the mix in RbMod v2.0.
+
++ AUTO-MOVE CLIENTS/GROUPS - On behalf of a few personal requests, RbMod
+  now detects upon joining the server either a clients group, or client
+  DBID which in turn will placed in a specified channel ID.
+
++ AUTO-DELETE DORMANT CHANNELS - Also upon a few large server admin
+  inquiries, RbMod will cleanup any temp,semi,perm. channel outside it's
+  exemption list, after laying dormant for a specified amount of time.
+  Be sure to add ALL your channel IDs (children excluded, as they remain
+  safe), before turning this feature ON.
+
++ CHANNEL FLOOD DETECTION - Rewritten to give the server admin the option
+  of either punishing, kicking or banning an individual for spamming
+  through all the channels. Punishment includes the old temporary channel
+  creation upon infractions, or the ability to use your own channel and
+  move the person back to a default channel once unpunished.
+
++ CHANNEL LANGUAGE FILTER - Designed for performance, this new version
+  includes an interval option but probably isn't necessary. as each room
+  will be scanned against the list of 'bad words' only when the name
+  changes, or the channel's created for the first time.
+
++ NICKNAME LANGUAGE FILTER - Like the Channel Language Filter, every
+  client gets reviewed for changes, only once a name change is detected
+  will RbMod scan for bad words against the current update.
+
++ NICKNAME PROTECTION - With 7 settings to choose from, you can now
+  protect a group of clients from other groups stealing your protected
+  client names. Choose whether to punish the same group members for using
+  a safe name, or just choose a kick / ban reason.
+
++ DYNAMIC BANNERS - Many admins seem to enjoy this feature, RbMod v2.0 now
+  gives you the ability to choose a list of as many Image URLs as you like.
+  With the capability of changing the banner LINKS on it's own independent
+  time cycle. Change the banner link once every 2 banners or choose which
+  ever variations suite your setup.
+
++ WELCOME BACK - Something fairly new, announce the time lapsed
+  for each client last seen upon joining. This feature will actually grow
+  into something a little more over the next few releases.
+
+
+=== Release 1.0 Beta 4 (Aug 25) ===
+
++ ADDED 'default_ban_duration' flag under rbm_settings.cfg. This applies to
+  !nickguard protection - More Ban options coming next.
+
++ ADDED 'realtime_animated_traffic_meter' flag to reduce or speedup the prime
+  portion of code that can slow some CPU's / bandwidth down with too many
+  clientinfo requests. Busy servers might also appreciate this flag.
+
++ ADDED Logging option under settings. All RbMod Information is written to a
+  new log (/logs/) at boot-up.
+
++ ADDED 'multiple_banners_links' to coincide with your dynamic URL links.
+  You can choose 3 links for 3 URLS, or 2 even 1 link for all your URLs...
+  Each banner link should be separated in relation with the banner URLs to
+  achieve the right sort order.
+
+* CHANGED The entire code base to Perl 5.10 (2007+). Requires Perl 5.10.0+ which
+  we should all have already ;)
+
+* CHANGED Guest permissions (rbm_guests.cf) to upload at each boot-up.
+
+* CHANGED 'safe_groups' flag to apply to Channel & Server flood as well as
+  Nick protection.
+
+- REMOVED ft_port flag in settings. This belonged to the icon upload engine
+  I originally wrote but removed due to port 30033 transfer limitations..
+
+- FIXED Max flood time not sticking to default 500 or users input upon boot-up.
+
+- FIXED trace router results for clients under Linux. Should be in order now.
+
+- FIXED 'multiple_banners_urls' got lost in the shuffle before Beta 3 release.
+  I rewrote most of this to start from left to write and repeat with the new
+  feature 'multiple_banners_links'.
+
+! NOTE bad word & channel flooding still needs 'safe_groups' code, coming.
+
+
+=== Release 1.0 Beta 3 (Aug 22) ===
+
+ + Added Nickname And Channel Language Filters
+   Drawing upon 450 default 'bad words', separated into an individual .cf file
+   for additional swear word combinations. Each channel and nickname are now
+   monitored against any word of your choosing.
+
+ + Added iOS icon/group for iOS clients.
+
+ + Added new feature: Channel Flood Guard
+   Depending on the settings you choose, each client (without ignore_sticky),
+   whom changes channels too quickly, will be moved and stuck for a set time.
+   If 'flip_max' exceeds limit, & below 'flip_maxtime'. Unstuck accordingly when
+   'flip_punish' times out.
+
+
+=== Release 1.0 Beta 2 - July 31 2012 ===
+
+ + Multiple threads W/ Multiple Sockets
+   RbMod uses 2 threads when first launched. And another thread per client
+   connection. Each thread also connects to the TS3 server with an individual
+   socket.
+
+ + Independent Sq-lite DB
+   Just like TeamSpeak3, RbMod uses a totally separate DB to cache user results,
+   such as traces and Wiki look-ups, also acting as an inter mediator between the
+   forked processes/threads running.
+
+ + Animated traffic meter
+   Based on each clients bytes Tx/Rx, and active channel, you can now watch each
+   users throughput on the server!
+   17x17 combinations, 289 custom icons.
+
+ + Hop/Route detection
+   Performs a hi-speed trace between the bot and client, producing an icon plus
+   description update. RbMod also caches each users results for quicker updates.
+   3 packs of 41 different numbers, 123 custom icons.
+
+ + O/S Detection
+   Visually sets a Windows or Mac and other icons for each client O/S type.
+
+ + Clone Detection
+   Produces either a x2 or x3, x4 etc. icon, based on the number of clones
+   connected from a single DB ID or IP address.
+   1 - 9+, 9 custom icons.
+
+ + Nickname Protection
+   Using !nickguard will protect an individuals current nickname on, or offline
+   from any other user trying to steal it. If someone joins or changes their
+   name to anything related to yours, they will first receive a warning then &
+   a kick/ban depending on the settings.cf flag.
+
+ + Dynamic Banner
+   TS3 can unfortunately be a little 'verbose' at times, so take caution when
+   using this first method. RbMods dynamic banner system hard sets the image
+   path(s) given in the setting.cf. If the timer flag is set to say, 60 seconds,
+   TS3 will verbally announce a server edit. So perhaps every 3600 or so for those
+   that just want to switch banners from time to time, this would be a reasonable
+   time limit IMHO.
+
+ + 241 Random Quotes
+   Either globally or personally messaging RbMod with !Quote will produce a
+   randomly generated quote.
+
+ + 150+ Acronyms/Words
+   RbMod will pickup on individual words from time to time and display
+   the results plus another word suggestion back to the client.
+
+ + Help Menu
+   !help will list any toggles or features already mentioned in this change log.
+
+
+=== Release 1.0 Beta 1 - July 12 2012 ===
+
+ * Internal beta staged on local VOIP server(s).

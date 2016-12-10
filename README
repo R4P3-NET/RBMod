@@ -1,0 +1,265 @@
+ ,============================================================================.
+ |             ____     __                             __                     |
+ |            /\  _`\  /\ \       /'\_/`\             /\ \                    |
+ |            \ \ \L\ \\ \ \____ /\      \     ___    \_\ \                   |
+ |             \ \ ,  / \ \ '__`\\ \ \__\ \   / __`\  /'_` \                  |
+ |              \ \ \\ \ \ \ \L\ \\ \ \_/\ \ /\ \L\ \/\ \L\ \                 |
+ |               \ \_\ \_\\ \_,__/ \ \_\\ \_\\ \____/\ \___,_\                |
+ |                \/_/\/ / \/___/   \/_/ \/_/ \/___/  \/__,_ /                |
+ |                                                                            |
+ |                   RbMod (Responsive Bot Modification)                      |
+ |             Copyright (C) 2013, Matthew Weyrich - Scor9ioN                 |
+ |                       (admin@rbmod.presension.com)                         |
+ |                         ᒥ ʀbmod.pʀesensioᥒ.com ᒣ                           |
+ |                         ᒪ ʁƿɯoɖ.bʁɢƨɢuƨᵎoᥙ.coɯ ᒧ                           |
+ |                                  vƸ.2.3                                    |
+ `============================================================================`
+
+
+
+  LICENSE INFORMATION   
+    This code is free software; you can redistribute it and/or modify it under the terms
+    of the Artistic License 2.0, and GNU General Public License 2.0, For more details,
+    see the full text of the licenses at http://www.perlfoundation.org/artistic_license_2_0,
+    and http://www.gnu.org/licenses/gpl-2.0.html.
+
+
+  DISCLAIMER
+    This program is distributed in the hope that it will be useful, but it is provided "as is"
+    and without any express or implied warranties. For more details, see the full text of the
+    licenses at http://www.perlfoundation.org/artistic_license_2_0,
+    and http://www.gnu.org/licenses/gpl-2.0.html.
+
+
+  INTRODUCTION
+    RbMod was originally conceived about 7 years ago for TeamSpeak 2, some in theory and the
+    rest in actual code. This how ever is a completely new project from scratch.
+
+    FEATURE - Ping Meter
+    Independent of the TeamSpeak query interface, this new feature will attempt
+    to either use the built in module 'Net::Ping' to ping a client IP directly,
+    if an ECHO or TCP ping fails, it will fall back to a trace-route to obtain
+    either the clients ping directly, or from the first hop or two in front of
+    the specific client.
+
+    FEATURE - Sticky Channel for administrators to drag & drop client
+    punishments. Place anyone that's been spamming your server directly into
+    a selected channel ID of your choice - The server group 'Rb Sticky' will
+    automatically attach to the offending client - until dragged back out of
+    the specific channel you've chosen.
+
+    FEATURE - Client description language filter.
+    Monitor all client descriptions for swear words from the rbm_badwords.cf
+
+    FEATURE - On-join client description / tagline global message.
+    Append either a 200 character !tag <here> to display globally to all your
+    buddies upon joining the server. !deltag to remove Rb custom saved tagline.
+    If the client doesn't choose a !tag, the description field from TS3 will be
+    used instead (max of 80 characters). Admins can set client on-join tags
+    easily with the later.
+
+    FEATURE - On-part random color coded goodbye messages.
+    RbMod now uses another *.cf file (/rbm_extras/rbm_goodbye.cf) to globally
+    text message a random color coated departure message for every 3rd-4th
+    disconnection a client makes (independent of other disconnects). This
+    feature uses over 1100 HEX color codes to generate 'rainbow' type
+    message effects.
+
+    FEATURE - Geographical Database
+    Dependant upon 'Geo::IP::PurePerl' CPan module & rbm_settings.cf On/Off
+    toggle, RbMod can now pickup a clients City/Region (database permitting)
+    and further utilize these results in other features such as the on-join
+    channel creation feature or weather statistics to name a few. This
+    feature is disabled by default until both the Geo::IP::PurePerl is installed
+    ('cpan' .. 'install Geo::IP::PurePerl') and the free 'GeoLite City' BINARY
+    database that this module utilizes is correctly placed at the root of RbMod.
+    '/GeoLiteCity.dat'
+    'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz'
+
+    FEATURE - Weather Conditions
+    With 'Geo::IP::PurePerl' correctly running and enabled
+    under rbm_settings.cf, our second dependency in which to obtain user
+    temperatures comes in the form of 'Weather::Underground'. This module,
+    when installed (cpan> 'install Weather::Underground') will enable
+    certain temperature statistics to appear next to a clients on-join
+    'status' group for a short period, as well as a global Celsius
+    / Fahrenheit / Conditions global message upon first connections.
+    There's of course the more permanent feature 'Temperatures_On'
+    that utilizes 85 temperature icons (from -33c - +50c), updated
+    on a set interval for all online connections.
+
+    FEATURE - RSS Feeds
+    With the use of 'XML::Parser' module, RbMod can now attach to a URL of
+    your choosing and monitor the contents for changes, globally displaying
+    the results with a interval variable.
+
+    FEATURE - Reconnect Flood Detection Gauge.
+    Written in hopes of reducing client re-connections, either intentional
+    or from simple repetitive timeouts due to poor client connections, this
+    feature will monitor the amount of reconnects under a set period of time,
+    each infraction will escalate to further warn, kick & inevitably a ban.
+    There's about 6 tiers to this 'grey' list the mod uses to watch ones
+    reconnect history.
+
+    FEATURE - Channel Query 'Bots'.
+    Designed intentionally to tap into Screech's 'Now Playing' Music ->
+    Channel Plugin. Setup one or more query bots in specific channel(s)
+    to watch a target channels text history. Each line from the channel
+    chat will immediately go beside a specified client DBID, displaying
+    for example the first 30 characters of a song beside a GUI client
+    connected in the form of a group 'tag' in brackets, as well as
+    changing the targets description to show 0-80 characters of the
+    channel text monitored.
+
+    FEATURE - Traffic Meter
+    One of RbMod's largest attractions has now been rewritten
+    to produce the smoothest possible output for your TS3 server. In
+    the previous RbMod releases, all the dynamic icon updates took
+    place in a group generated per client. Since discovering that this
+    method has it's limitations (most apparent; CPU cycles generated
+    for each icon update), RbMod now uses the 'Client' icon slot
+    instead, which pans out to be much less overhead on the TS3 server
+    processing the image updates. There's also an interval toggle to
+    slow down this particular feature if need be.
+
+    FEATURE - Automatic Ranking
+    Inspired by the gaming community and a few individuals, RbMod
+    now includes 2 icon packs to choose from. Watch client ranks
+    update live online. Subsequent ranks become harder to reach as
+    each clients TOTAL time + scale + time / 3 = Next rank.
+
+    FEATURE - Trace Routes
+    Rewritten to produce a finer output than it's previous
+    predecessor in RbMod v1.0. This version now includes the default option
+    of performing a back to back trace per client. Using either ICMP / SYN
+    in Linux or just finding the highest path possible. Also includes a 4th
+    Icon pack of 41 new hop numbers (Default orange theme).
+
+    FEATURE - Reverse DNS Look-ups
+    Strictly for informative purposes, you can issue private
+    messages to new joins depicting the reverse DNS from their ISP.
+
+    FEATURE - Clone Detection
+    Unlike version 1, this new clone detection uses a
+    completely new icon pack of 7 human figure icons. each lighting up
+    depending on the amount of clones per individual DBID.
+
+    FEATURE - Operating System Detection
+    Automatically detecting Windows / Linux / Mac or iOS
+    clients and visually displaying the appropriate icon. Four slightly
+    reworked OS icons have been added to the mix in RbMod v2.0.
+
+    FEATURE - Auto-Move DBIDs/Groups/CCodes/Regions/Cities
+    On behalf of a few personal requests, RbMod now detects upon joining
+    the server either a clients group, or client DBID which in turn gets
+    placed in a specified channel ID. If those aren't found, the client
+    will be placed into a preexisting 2 digit CCode channel (CA) Canada,
+    for example. Channel creation for Country/Region/City can also be
+    utilized using the Pure-Perl module.
+
+    FEATURE - Auto-Kick Recorders
+    Automatically remove unauthorized recorders from particular Group ID's.
+
+    FEATURE - Auto-Delete Dormant Channels
+    RbMod will cleanup any temp, semi-perm, perm. channel outside it's
+    exemption list, only after laying dormant for a specified amount of time.
+    Be sure to add ALL your channel IDs, before turning this feature ON.
+
+    FEATURE - Auto-Fill Empty CCodes
+    Place an unknown country flag next to clients whom don't show a country,
+    Ethernet icon for internal connections or a country flag from the CCode
+    icon pack with Pure-Perl database enabled.
+
+    FEATURE - Channel Flood Detection    
+    Rewritten to give the server admin the option
+    of either punishing, kicking or banning an individual for spamming
+    through all the channels. Punishment includes the old temporary channel
+    creation upon infractions, or the ability to use your own channel and
+    move the person back to a default channel once unpunished.
+
+    FEATURE - Channel Language Filter
+    Designed for performance, this new version includes an interval
+    option but probably isn't necessary. as each room will be
+    scanned against the list of 'bad words' only when the name changes,
+    or the channel's created for the first time.
+
+    FEATURE - Nickname Language Filter
+    Like the Channel Language Filter, every client gets reviewed for
+    changes, only once a name change is detected will RbMod scan for
+    bad words against the current update.
+
+    FEATURE - Nickname Protection
+    With seven settings to choose from, you can now protect a group
+    of clients from other groups stealing your protected client names.
+    Choose whether to punish the same group members for using a safe
+    name, or just choose a kick / ban reason.
+
+    FEATURE - Group Protection
+    Select individual client DBID's, and the corresponding group they
+    belong with. If any client outside this list joins an unauthorized
+    group, the group will be revoked immediately and kicked if desired.
+
+    FEATURE - Dynamic Banners / Banner Links
+    Many admins seem to enjoy this feature, RbMod now gives you the
+    ability to choose a list of as many Image URLs as you like. With
+    the capability of changing the banner LINKS on it's own independent
+    time cycle. Change the banner link once every 2 banners or choose
+    which ever variations suite your setup.
+
+    FEATURE - Client Status
+    Display either a 'Live', 'Idle' or 'AFK' icon, based upon desired
+    time requirements of your choice. Country & Temperatures also show
+    for a set interval during a new client connection in a group tag.
+
+    FEATURE - Message Of The Day
+    RbMod now includes a separate configuration file to add or subtract
+    custom RbMod variables to display to new clients or existing. See
+    rbm_motd.cf
+
+    FEATURE - Real-time Black-hole List
+    With this new feature enabled, every client will be checked
+    (via nslookup) against the online RBL at server of your choice.
+    White-list any IP addresses that are known to be friendly, yet
+    flagged.
+
+    FEATURE - AFK-Move
+    Choose which groups to skip over as this feature will move any client
+    found idling over a set amount of time to a chosen channel ID.
+
+
+  INSTALLATION
+    - Download and unzip the contents to a server / directory of your choice.
+    - Open rbm_settings.cf and change the first few options for your server setup.
+    - Copy the contents of /rbm_icons/* to your TS3 virtual server.
+      '.../teamspeak/files/virtualserver_1/internal/icons' for example.
+      Please go through the settings.cf features and select the corresponding icon pack or
+      leave the entire icon pack off your virtual server if disabling a particular feature.
+    - Make sure rbmod.pl is set to 744 (executable) and run #: ./rbmod.pl
+
+
+  OTHER NOTES
+    - Remember to add RbMod's IP to the TS3 query_ip_whitelist.txt
+    - Disable logging of server permissions on your virtual server might reduce any excess
+      HDD activity.
+
+
+  AUTHOR / FEEDBACK
+    Matthew Weyrich - Scor9ioN
+    admin@rbmod.presension.com
+
+
+  CREDITS
+    Dan22 - Thanks go out to Dan for his personal quotes and other /rbm_extras/*
+            contributions. As well, for beta testing RbMod everyday and engineering
+            new ideas in the development of RbMod.
+
+    J3llB3an - My lady, for putting up with all the late nights - early morning coding
+               for the past few months. She has just as much patience as I... =)
+
+
+  CURRENT VERSION
+    Version Ƹ.2 (Beta)
+
+
+  HISTORY
+    See CHANGELOG.
