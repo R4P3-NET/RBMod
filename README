@@ -16,6 +16,20 @@
  `============================================================================`
 
 
+  INSTALLATION
+    - Download and unzip the contents to a server / directory of your choice.
+    - Open rbm_settings.cf and change the first few options for your server setup.
+    - Unzip the contents of /rbm_icons.zip to your TS3 virtual server.
+      '.../teamspeak/files/virtualserver_1/internal/icons' for example.
+      Please go through the settings.cf features and select the corresponding icon pack or
+      leave the entire icon pack off your virtual server if disabling a particular feature.
+    - Make sure rbmod.pl is set to 744 (executable) and run #: ./rbmod.pl
+
+
+  OTHER NOTES
+    - Remember to add RbMod's IP to the TS3 query_ip_whitelist.txt
+    - Disable logging of server permissions on your virtual server might reduce any excess
+      HDD activity.
 
   LICENSE INFORMATION   
     This code is free software; you can redistribute it and/or modify it under the terms
@@ -225,22 +239,6 @@
     FEATURE - AFK-Move
     Choose which groups to skip over as this feature will move any client
     found idling over a set amount of time to a chosen channel ID.
-
-
-  INSTALLATION
-    - Download and unzip the contents to a server / directory of your choice.
-    - Open rbm_settings.cf and change the first few options for your server setup.
-    - Copy the contents of /rbm_icons/* to your TS3 virtual server.
-      '.../teamspeak/files/virtualserver_1/internal/icons' for example.
-      Please go through the settings.cf features and select the corresponding icon pack or
-      leave the entire icon pack off your virtual server if disabling a particular feature.
-    - Make sure rbmod.pl is set to 744 (executable) and run #: ./rbmod.pl
-
-
-  OTHER NOTES
-    - Remember to add RbMod's IP to the TS3 query_ip_whitelist.txt
-    - Disable logging of server permissions on your virtual server might reduce any excess
-      HDD activity.
 
 
   AUTHOR / FEEDBACK
